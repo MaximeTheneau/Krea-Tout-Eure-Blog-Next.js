@@ -1,22 +1,22 @@
 import Slug  from './[slug]'
 import { useRouter } from 'next/router';
+import Thumbnail from '../src/components/thumbnail';
+import stylesThumbnail from '../src/styles/Thumbnail.module.scss';
 
-export default function Index({ pageHome, thumbnail }) {
+export default function Index({ thumbnail }) {
   console.log(thumbnail);
   
   return (
-    <div>
+    <div className={stylesThumbnail.thumbnail}>
       {
-        thumbnail.map((item, index) => {
+        thumbnail.map((post) => {
           return (
-            <div key={index}>
-              {item.title}
+            <div key={post.id} >
+              <Thumbnail {...post}/>
             </div>
           )
         })
       }
-      <p>{pageHome.contents} </p>
-      <p>{pageHome.contents2}</p>
     </div>
   )
 }
