@@ -1,3 +1,5 @@
+import { useRouter } from "next/router"
+import { useEffect } from "react"
 
 
 
@@ -10,7 +12,6 @@ export async function getStaticPaths() {
     return {
       paths: [],
       fallback: 'blocking',
-      idPage:  [],
     }
   }
 
@@ -21,22 +22,26 @@ export async function getStaticPaths() {
   // Get the paths we want to prerender based on posts
   // In production environments, prerender all pages
   // (slower builds, but faster initial page load)
-  const paths = posts.map((post) => (
-    {params: { slug: post.slug}}
-    ))
+  const paths = posts.map((post) => {
+    return {params: { slug: post.slug}}})
   // { fallback: false } means other routes should 404
   return { paths, fallback: false, }
   }
-  export async function getStaticProps({ params }) {
-    // params contains the post `id`.
-    // If the route is like /posts/1, then params.id is 1
+
+export async function getStaticProps({ params }) {
+
     const res = await fetch(`http://localhost:8000/api/pages/${params.slug}`)
-    const post = await res.json()
+    const page = await res.json()
     console.log(params)
     // Pass post data to the page via props
-    return {props: { post } }
-  }
-  export default function Page({ post }) {
-    console.log(post);
-    // Render post...
+    return {props: { page } }
+}
+
+export default function Slug({ page }) {
+    return (
+        <div>
+            <h1>{page.title}</h1>
+            <div>{page.contents}</div>
+        </div>
+    )
   }

@@ -1,13 +1,22 @@
+import Slug  from './[slug]'
+import { useRouter } from 'next/router';
 
-import Layout from '../src/components/layout'
+export default function Index({ pageHome }) {
 
-export default function Index() {
   return (
-    <section>
-      <h2>Layout Example (Index)</h2>
-      <div className=''>
-        </div>
-
-    </section>
+    <div>
+      <h1>{pageHome.title}</h1>
+      <p>{pageHome.contents } </p>
+      <p>{pageHome.contents2}</p>
+    </div>
   )
 }
+
+export async function getStaticProps() {
+
+  const res = await fetch(`http://localhost:8000/api/pages/Bienvenue`)
+  const pageHome = await res.json()
+
+  return {props: { pageHome } }
+}
+
