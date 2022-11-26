@@ -3,16 +3,14 @@ import { useRouter } from 'next/router';
 import Thumbnail from '../src/components/thumbnail';
 import stylesThumbnail from '../src/styles/Thumbnail.module.scss';
 
-export default function Index({ thumbnail }) {
-  console.log(thumbnail);
-  
+export default function Index({ thumbnail, base64 }) {
   return (
     <div className={stylesThumbnail.thumbnail}>
       {
         thumbnail.map((post) => {
           return (
             <div key={post.id} >
-              <Thumbnail {...post}/>
+              <Thumbnail {...post} {...base64} />
             </div>
           )
         })
@@ -22,11 +20,15 @@ export default function Index({ thumbnail }) {
 }
 
 export async function getStaticProps() {
+  const resBase64 = await fetch(`http://localhost:8000/api/placeholder`)
+  const base64 = await resBase64.json() 
+
   const resPost = await fetch(`http://localhost:8000/api/posts/thumbnail`)
   const thumbnail = await resPost.json()
+
   const res = await fetch(`http://localhost:8000/api/pages/Accueil`)
   const pageHome = await res.json()
 
-  return {props: { pageHome, thumbnail } }
+  return {props: { pageHome, thumbnail, base64 } }
 }
 

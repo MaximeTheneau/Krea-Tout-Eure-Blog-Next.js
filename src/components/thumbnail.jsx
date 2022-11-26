@@ -4,8 +4,8 @@ import styles from '../styles/Thumbnail.module.scss';
 import Link from 'next/link';
 import Image from 'next/image';
 
-export default function thumbnail({ imgThumbnail, title, slug }) {
-
+export default function thumbnail({ imgThumbnail, title, slug, base64 }) {
+console.log(base64);
   return (
     <>
         <div className={styles['thumbnail-card']} >
@@ -16,7 +16,10 @@ export default function thumbnail({ imgThumbnail, title, slug }) {
                     alt={title} 
                     width={250} 
                     height={250}
+                    placeholder="blur"
+                    blurDataURL={`data:image/jpeg;base64,/${base64}`}
                     className={styles['thumbnail-card__img']}
+                    layout="responsive"
                 />
                 <h2 className={styles['thumbnail-card__title']}>{title}</h2>
             </Link>

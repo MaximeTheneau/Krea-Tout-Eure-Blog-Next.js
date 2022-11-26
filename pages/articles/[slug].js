@@ -1,7 +1,4 @@
-import { useRouter } from "next/router"
-import { useEffect } from "react"
-
-
+import ImagePost from "../../src/components/imagePost";
 
 export async function getStaticPaths() {
 
@@ -37,10 +34,10 @@ export async function getStaticProps({ params }) {
 }
 
 export default function Slug({ post }) {
+  console.log(post)
     return (
         <div>
-            <h1>{post.title}</h1>
-            <div>{post.contents}</div>
+            <ImagePost {...post} />
         </div>
     )
   }
