@@ -1,52 +1,50 @@
-
+import { useState } from 'react';
+import Image from 'next/image';
+import ImageModal from './modal/Image';
 import styles from '../styles/Image.module.scss';
 
-import Image from 'next/image';
+export default function ImagePost({
+  imgPost, imgPost2, imgPost3, imgPost4, title, base64,
+}) {
+  const [toggleModal, setToggleModal] = useState(false);
+  const [viewImg, setImgView] = useState('');
+  const arrayImg = [imgPost, imgPost2, imgPost3, imgPost4];
 
-
-export default function imagePost({ imgPost, imgPost2, imgPost3, imgPost4, title }) {
+  const onClickModal = (evt) => {
+    setImgView({
+      path: evt.path,
+      width: evt.width,
+      height: evt.height,
+      title: evt.title,
+    });
+    setToggleModal(!toggleModal);
+  };
   return (
     <>
-        <div className={styles['post-card']} >
-            <div>
-              <Image
-                src={imgPost.path}
-                width={imgPost.width}
-                height={imgPost.height}
-                className={styles['post-card__img']}
-              />
-                {imgPost2 && (
-                  <Image
-                  src={imgPost2.path}
-                  alt={title}
-                  width={imgPost2.width}
-                  height={imgPost2.height}
-                  className={styles['post-card__img']}
-                />)}
-              {imgPost3 && (
-                <Image
-                  src={imgPost3.path}
-                  alt={title}
-                  width={imgPost3.width}
-                  height={imgPost3.height}
-                  className={styles['post-card__img']}
-                />
-              )}
-              {imgPost4 && (
-                <Image
-                  src={imgPost4.path}
-                  alt={title}
-                  width={imgPost4.width}
-                  height={imgPost4.height}
-                  className={styles['post-card__img']}
-                />
-              )}
-
-            </div>
+      {toggleModal ? (
+        <ImageModal
+          path={viewImg.path}
+          width={viewImg.width}
+          height={viewImg.height}
+          title={viewImg.alt}
+          onClickModal={onClickModal}
+        />
+      ) : ''}
+      {arrayImg.map((img) => img && (
+        <div className={styles.image}>
+          <Image
+            src={img.path}
+            width={img.width}
+            height={img.height}
+            alt={title}
+            layout="responsive"
+            placeholder="blur"
+            blurDataURL={`data:image/jpeg;base64,/${base64}`}
+            className={styles['post-card__img']}
+            onClick={() => onClickModal(img)}
+          />
         </div>
-
-
+      ))}
     </>
-    
-  )
+  );
 }
