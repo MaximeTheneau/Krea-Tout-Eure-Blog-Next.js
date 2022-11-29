@@ -12,6 +12,19 @@ const nextConfig = {
   },
   rules: {
     'react/jsx-props-no-spreading': 'off',
+    'jsx-a11y/no-noninteractive-element-interactions': [
+      'error',
+      {
+        handlers: [
+          'onClick',
+          'onMouseDown',
+          'onMouseUp',
+          'onKeyPress',
+          'onKeyDown',
+          'onKeyUp',
+        ],
+      },
+    ],
   },
 };
 

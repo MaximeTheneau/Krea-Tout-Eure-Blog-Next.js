@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-
 export default function Contact() {
   const [state, setState] = useState({
     name: '',
@@ -24,7 +23,7 @@ export default function Contact() {
             email: '',
             subject: '',
             message: '',
-          }
+          },
         });
       })
       .catch((err) => console.log(err));

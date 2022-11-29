@@ -7,7 +7,11 @@ export default function Navbar() {
   return (
     <nav
       className={styles.navbar}
-      onMouseLeave={() => setToggleNav(!toggleNav)}
+      onMouseLeave={() => (
+        toggleNav === true ? (setTimeout(() => (
+          setToggleNav(false)
+        ), 7000)) : null
+      )}
     >
       <div
         aria-hidden="true"
