@@ -11,6 +11,10 @@ body {
   text-align: center;
 }
 
+main{
+  min-height: 93vh;
+}
+
 h1, h2{
   font-size: $font-size-large;
   font-family: $font-secondary;

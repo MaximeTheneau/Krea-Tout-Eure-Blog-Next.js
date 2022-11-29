@@ -4,21 +4,25 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     z-index: 1;
     width: 100%;
     background-color: #fff;
-    font-family: $font-secondary;
+    font-family: $font-primary;
     text-align: left;
+    padding:  1rem;
     &__list{
+        line-height: 1.5;
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        width: 30%;
         animation: fadeIn 1s ease;
         position: relative;
+    }
+    &__{
+        margin: 1rem 0;
     }
 }
 //* Animation
@@ -27,8 +31,11 @@
         opacity: 0;
         left: -100%;
     }
+    30% {
+        opacity: 0.5;
+        left: 0;
+    }
     100% {
         left: 0;
-        opacity: 1;
     }
   }
