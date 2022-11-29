@@ -1,0 +1,31 @@
+@import './variables.scss';
+
+.thumbnail {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  &-card{
+    position: relative;
+    width: 250px;
+    height: 250px;
+    background: $color-secondary;
+    &__img{
+      object-fit: cover;
+      filter: blur(1.8px);
+      opacity: 0.5;
+      width: 250px;
+      height: 250px;
+    }
+    &__title{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: $color-white-opacity;
+      width: 100%;
+      padding: 1rem 0 1rem 0;
+
+    }
+  }
+  
+}

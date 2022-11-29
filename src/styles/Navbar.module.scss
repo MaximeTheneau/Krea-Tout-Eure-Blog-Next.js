@@ -1,0 +1,34 @@
+@import './variables.scss';
+
+.navbar{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    background-color: #fff;
+    font-family: $font-secondary;
+    text-align: left;
+    &__list{
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        width: 30%;
+        animation: fadeIn 1s ease;
+        position: relative;
+    }
+}
+//* Animation
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        left: -100%;
+    }
+    100% {
+        left: 0;
+        opacity: 1;
+    }
+  }
