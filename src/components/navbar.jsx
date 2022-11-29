@@ -8,9 +8,9 @@ export default function Navbar() {
     <nav
       className={styles.navbar}
       onMouseLeave={() => (
-        setTimeout(() => {
-          setToggleNav(false);
-        }, 1000)
+        toggleNav === true ? (setTimeout(() => (
+          setToggleNav(false)
+        ), 7000)) : null
       )}
     >
       <div
