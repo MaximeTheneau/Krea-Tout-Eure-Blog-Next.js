@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import styles from '../src/styles/Contact.module.scss';
 
 export async function getStaticProps() {
   const res = await fetch('http://localhost:8000/api/pages/Contact');
@@ -7,7 +8,6 @@ export async function getStaticProps() {
 
   return { props: { pageContact } };
 }
-
 
 export default function Contact({ pageContact }) {
   const [state, setState] = useState({
@@ -37,9 +37,11 @@ export default function Contact({ pageContact }) {
             message: '',
           },
         });
-      })
+      });
   };
-
+  function createMarkup(data) {
+    return { __html: data };
+  }
   return (
     <div>
       <header>
@@ -51,16 +53,42 @@ export default function Contact({ pageContact }) {
         />
         <h1>{pageContact.title}</h1>
       </header>
-      <main>
+      <main className={styles.contact}>
+        <div className={styles.contact__adress}>
+          <div
+            className={styles.contact__adress__content}
+            dangerouslySetInnerHTML={createMarkup(pageContact.contents)}
+          />
+          <div
+            className={styles.contact__adress__map}
+            dangerouslySetInnerHTML={createMarkup(pageContact.contents2)}
+          />
+        </div>
 
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className={styles.contact__form}>
+          <div className="input">
+            Contactez Kréa Tout Eure ou le webmaster ?
+            <select
+              onChange={(e) => setState({
+                ...state,
+                form: { ...state.form, contactTo: e.target.value },
+              })}
+              value={state.form.contactTo}
+            >
+              <option value="assoc">Kréa Tout Eure</option>
+              <option value="webmaster">Webmaster</option>
+            </select>
+          </div>
           <div className="input">
             Nom
             <input
               type="text"
               name="name"
               value={state.form.name}
-              onChange={(e) => setState({ ...state, form: { ...state.form, name: e.target.value } })}
+              onChange={(e) => setState(
+                { ...state, form: { ...state.form, name: e.target.value } },
+              )}
+              placeholder="Nom Prénom"
               required
             />
           </div>
@@ -70,20 +98,12 @@ export default function Contact({ pageContact }) {
               type="email"
               name="email"
               value={state.form.email}
-              onChange={(e) => setState({ ...state, form: { ...state.form, email: e.target.value } })}
+              onChange={(e) => setState(
+                { ...state, form: { ...state.form, email: e.target.value } },
+              )}
+              placeholder="exemple@email.fr"
               required
             />
-          </div>
-          <div className="input">
-            <select
-              onChange={(e) => setState({
-                ...state,
-                form: { ...state.form, contactTo: e.target.value },
-              })}
-            >
-              <option value="assoc">Kréa Tout Eure</option>
-              <option value="webmaster">Webmaster</option>
-            </select>
           </div>
           <div className="textarea">
             Message
@@ -94,6 +114,7 @@ export default function Contact({ pageContact }) {
                 form: { ...state.form, message: e.target.value },
               })}
               name="message"
+              placeholder="Votre message"
               required
             />
           </div>

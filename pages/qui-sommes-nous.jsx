@@ -1,4 +1,10 @@
 
 export default function QuiSommesNous() {
-  return <div>About</div>
+  return (
+    <>
+      <div>
+        About
+      </div>
+    </>
+  )
 }
