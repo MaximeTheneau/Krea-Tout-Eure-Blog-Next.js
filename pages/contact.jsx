@@ -17,6 +17,7 @@ export default function Contact({ pageContact }) {
       email: '',
       message: '',
     },
+    textArea: 3,
   });
 
   const handleSubmit = (e) => {
@@ -35,10 +36,47 @@ export default function Contact({ pageContact }) {
             name: '',
             email: '',
             message: '',
+
           },
         });
       });
   };
+
+  const handleChangeMessage = (e) => {
+    const trows = e.target.value.split('\n').length - 1 === 0 ? 1 : e.target.value.split('\n').length - 1;
+    setState({
+      ...state,
+      textArea: trows,
+      form: {
+        ...state.form, message: e.target.value, confirmationMessage: 'change',
+      },
+    });
+    const textareaheight = state.textArea;
+    console.log(textareaheight);
+    if (e.target.value.length > 250) {
+      setState({
+        ...state,
+        form: {
+          ...state.form,
+          confirmationMessage: 'confirmation',
+          message: e.target.value,
+          textArea: trows,
+        },
+      });
+    } if (e.target.value.length > 250) {
+      setState({
+        ...state,
+        form: {
+          ...state.form,
+          confirmationMessage: 'error',
+          message: e.target.value,
+          textArea: trows,
+
+        },
+      });
+    }
+  };
+
   function createMarkup(data) {
     return { __html: data };
   }
@@ -108,12 +146,11 @@ export default function Contact({ pageContact }) {
           <div className="textarea">
             Message
             <textarea
+              rows={state.textArea}
               value={state.form.message}
-              onChange={(e) => setState({
-                ...state,
-                form: { ...state.form, message: e.target.value },
-              })}
+              onChange={handleChangeMessage}
               name="message"
+              wrap="off"
               placeholder="Votre message"
               required
             />

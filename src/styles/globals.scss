@@ -60,13 +60,20 @@ textarea{
   font-size: $font-size;
   width: 100%;
   padding: 0.5rem;
+  background: none;
   &:focus{
     outline: none;
+  }
+  &:active{
+    background: none;
   }
   &::placeholder{
     color: $color-primary;
     opacity: 0.5;
   }
+}
+input:-webkit-autofill{
+  background: #fff;
 }
 select{
   width: 100%;

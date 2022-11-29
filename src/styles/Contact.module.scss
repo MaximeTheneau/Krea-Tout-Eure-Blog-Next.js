@@ -28,6 +28,9 @@
             flex-direction: column;
             align-content: center;
         }
+        & textarea{
+            overflow-y: hidden;
+        }
     }
 }
 
