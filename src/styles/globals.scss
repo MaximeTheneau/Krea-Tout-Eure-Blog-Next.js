@@ -6,11 +6,11 @@
 body {
   font-family: $font-primary;
   font-size: $font-size;
-  color: $color-primary;
+  color: $font-color;
   text-align: center;
   line-height: 1.8;
+  white-space: pre-line;
 }
-
 
 h1{
   font-size: 2.8rem;
@@ -19,7 +19,7 @@ h1{
   padding: 0;
 }
 h2 {
-  font-size: 2.5rem;
+  font-size: 2rem;
   font-weight: 700;
   margin: 0 0 1rem 0;
   padding: 0;
@@ -32,31 +32,48 @@ h1, h2{
   font-weight: bold;
 }
   //* Button
-  button{
-    border: none;
+button{
     font-size: $font-size;
-    background: $color-blue;
-    color: #fff;
+    background: $color-glass;
+    border: 1px solid #ffffff4d;
+    border-radius: 10rem;
     cursor: pointer;
-    font-weight: 900;
-    padding: 1rem  1rem;
+    font-weight: 700;
+    padding: 0.5rem 1rem;
     margin: 1rem 0;
-    border-radius: 0.5rem;
     transition: color 1s linear;
     & i{
-      margin: 0 0.5rem;
-      padding: 1rem ;
-    }
-    &:hover{
-      color: $color-primary;
-      transition: color 1s linear;
+      padding: 0 0 0 1rem ;
     }
   }
+.button{
+  &-glass{
+      background: $color-glass;
+      border: 1px solid $color-glass;
+      backdrop-filter: blur(5rem);
+      color: $color-white;
+    }
+    &-submit{
+      backdrop-filter: blur(7.1px);
+      -webkit-backdrop-filter: blur(7.1px);
+      border: 1px solid rgba(63, 194, 240, 0.3);
+      background: rgba(63, 194, 240, 1);
+      box-shadow: 0 15px 35px rgba(0, 0, 0, 0.11);
+      color: #fff;
+      }
+    
+
+    &:hover{
+      transition: color 1s linear;
+    }
+}
+
+
 //* Form
 input,
 textarea{
   border: none;
-  border-bottom: 0.5px solid $color-primary;
+  border-bottom: 0.5px solid $font-color;
   font-size: $font-size;
   width: 100%;
   padding: 0.5rem;
@@ -68,7 +85,7 @@ textarea{
     background: none;
   }
   &::placeholder{
-    color: $color-primary;
+    color: $font-color;
     opacity: 0.5;
   }
 }
@@ -77,9 +94,9 @@ input:-webkit-autofill{
 }
 select{
   width: 100%;
-  border: 0.5px solid $color-primary;
+  border: 0.5px solid $font-color;
   font-size: $font-size;
-  color: $color-primary;
+  border-radius: $border-radius;
   background: none;
   padding: 0.5rem;
   &:focus{
@@ -95,13 +112,13 @@ a:hover{
   color: $color-blue;
   text-shadow: 0 0 0.2rem $color-white;
 }
-header img{
-  width: 50%;
-  margin: 0 auto;
-  height: auto;
-}
 header{
-  margin: 5rem 0 0 0;
+  background: $color-primary-gradient;
+  padding: 1rem;
+  margin: 0 0 1rem 0;
+  & img{
+    width: 50%;
+  }
 }
 
 hr{
@@ -121,15 +138,22 @@ hr{
 }
 
 .blur{
-  filter: blur(0.2em);
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 101%;
+  height: 102%;
+  backdrop-filter: blur(0.2rem);
+  z-index: 1;
 }
+
 
 //* Media Queries
 
 @media screen and (min-width: 720px) {
-  header img{
-    width: 20%;
-    margin: 0 auto;
-    height: auto;
+  header{
+    & img{
+      width: 30%;
+    }
   }
 }
