@@ -1,0 +1,63 @@
+@import './variables.scss';
+
+.contact{
+    width: 98%;
+    margin: 0 auto;
+    &__adress{
+        &__map{
+            width: 70%;
+            margin: 1rem auto;
+        };
+        & h2{
+            margin: 0 0 1rem 0;
+            padding: 0;
+        }
+        & address{
+            font-size: 1.2rem;
+            line-height: 1.8rem;
+            padding: 0;
+            width: 70%;
+            margin: 0 auto;
+        }
+    }
+    &__form{
+        width: 70%;
+        margin: 0 auto;
+        &__input{
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+        }
+        & textarea{
+            overflow-y: hidden;
+        }
+    }
+}
+
+//* Media Queries
+
+@media screen and (min-width: 720px) {
+    .contact{
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        &__adress{
+            width: 70%;
+            &__map{
+                height: 20rem;
+            };
+        }
+        &__form{
+            width: 30%;
+        }
+    }
+
+}
+  
+@media screen and (min-width: 1024px) {
+    .contact{
+        width: 70%;
+    }
+}
+  

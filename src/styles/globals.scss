@@ -3,21 +3,31 @@
 @use './icon.scss';
 @import './variables.scss';
 
-
 body {
   font-family: $font-primary;
   font-size: $font-size;
   color: $color-primary;
   text-align: center;
+  line-height: 1.8;
 }
 
-main{
-  min-height: 93vh;
-  margin: 5rem 0 0 0;
-}
 
+h1{
+  font-size: 2.8rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  padding: 0;
+}
+h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 1rem 0;
+  padding: 0;
+}
+h3{
+  font-weight: bold;
+}
 h1, h2{
-  font-size: $font-size-large;
   font-family: $font-secondary;
   font-weight: bold;
 }
@@ -41,8 +51,42 @@ h1, h2{
       color: $color-primary;
       transition: color 1s linear;
     }
-
   }
+//* Form
+input,
+textarea{
+  border: none;
+  border-bottom: 0.5px solid $color-primary;
+  font-size: $font-size;
+  width: 100%;
+  padding: 0.5rem;
+  background: none;
+  &:focus{
+    outline: none;
+  }
+  &:active{
+    background: none;
+  }
+  &::placeholder{
+    color: $color-primary;
+    opacity: 0.5;
+  }
+}
+input:-webkit-autofill{
+  background: #fff;
+}
+select{
+  width: 100%;
+  border: 0.5px solid $color-primary;
+  font-size: $font-size;
+  color: $color-primary;
+  background: none;
+  padding: 0.5rem;
+  &:focus{
+    outline: none;
+  }
+}
+
 img{
   max-width: 100%;
   margin: auto;
@@ -50,8 +94,16 @@ img{
 a:hover{
   color: $color-blue;
   text-shadow: 0 0 0.2rem $color-white;
-
 }
+header img{
+  width: 50%;
+  margin: 0 auto;
+  height: auto;
+}
+header{
+  margin: 5rem 0 0 0;
+}
+
 hr{
   width: 90%;
 }
@@ -70,4 +122,14 @@ hr{
 
 .blur{
   filter: blur(0.2em);
+}
+
+//* Media Queries
+
+@media screen and (min-width: 720px) {
+  header img{
+    width: 20%;
+    margin: 0 auto;
+    height: auto;
+  }
 }
