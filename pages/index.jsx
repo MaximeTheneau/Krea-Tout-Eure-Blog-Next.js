@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import Thumbnail from '../src/components/thumbnail';
 import styles from '../src/styles/Home.module.scss';
 
@@ -16,7 +17,8 @@ export async function getStaticProps() {
   return { props: { pageHome, thumbnail, base64 } };
 }
 
-export default function Index({ thumbnail, base64, pageHome }) {
+export default function Index({ thumbnail, base64, pageHome, cookiesGoogle }) {
+  console.log(cookiesGoogle);
   return (
     <>
       <header className={styles.home__header}>

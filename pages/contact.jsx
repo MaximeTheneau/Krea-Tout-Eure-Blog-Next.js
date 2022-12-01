@@ -6,7 +6,6 @@ import Confirmation from '../src/components/modal/Confirmation';
 export async function getStaticProps() {
   const res = await fetch('http://localhost:8000/api/pages/Contact');
   const pageContact = await res.json();
-
   return { props: { pageContact } };
 }
 
@@ -23,8 +22,14 @@ export default function Contact({ pageContact }) {
     confirmationEmail: null,
     confirmationMessage: null,
     toogleConfirmation: false,
+    cookiesGoogle: '',
   });
 
+  useEffect(() => {
+    const cookieslocalStorage = window.localStorage.getItem('cookiesGoogle');
+    setState({ ...state, cookiesGoogle: cookieslocalStorage });
+  }, []);
+  console.log(state.cookiesGoogle);
   const onClickConfirmation = () => {
     setState({
       ...state,
@@ -114,7 +119,7 @@ export default function Contact({ pageContact }) {
 
   return (
     <div>
-      {state.toogleConfirmation ? (
+      {state.toogleConfirmation === 'false' ? (
         <>
           <div className="blur" />
           <Confirmation onClickConfirmation={onClickConfirmation} />
@@ -152,10 +157,12 @@ export default function Contact({ pageContact }) {
             <address>
               12 rue du Docteur Chanoine , Vernon, France, 27200
             </address>
-            <div
-              className={styles.contact__adress__map}
-              dangerouslySetInnerHTML={createMarkup(pageContact.contents2)}
-            />
+            {state.cookiesGoogle ? (
+              <div
+                className={styles.contact__adress__map}
+                dangerouslySetInnerHTML={createMarkup(pageContact.contents2)}
+              />
+            ) : ''}
           </div>
           <div className={styles.contact__form}>
             <h2>Formulaire de contact</h2>
