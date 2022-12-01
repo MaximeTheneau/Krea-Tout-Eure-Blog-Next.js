@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import styles from '../src/styles/Contact.module.scss';
+import Confirmation from '../src/components/modal/Confirmation';
 
 export async function getStaticProps() {
   const res = await fetch('http://localhost:8000/api/pages/Contact');
@@ -17,8 +18,19 @@ export default function Contact({ pageContact }) {
       email: '',
       message: '',
     },
-    textArea: 3,
+    textArea: 1,
+    confirmationName: null,
+    confirmationEmail: null,
+    confirmationMessage: null,
+    toogleConfirmation: false,
   });
+
+  const onClickConfirmation = () => {
+    setState({
+      ...state,
+      toogleConfirmation: false,
+    });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,15 +40,23 @@ export default function Contact({ pageContact }) {
       body: JSON.stringify(state.form),
     };
     fetch('http://localhost:8000/api/contact', requestOptions)
-      .catch((err) => console.log(err))
+      .catch(() => (
+        setState({
+          ...state,
+        })
+      ))
       .finally(() => {
         setState({
+          ...state,
+          toogleConfirmation: true,
+          confirmationName: null,
+          confirmationEmail: null,
+          confirmationMessage: null,
           form: {
             contactTo: 'assoc',
             name: '',
             email: '',
             message: '',
-
           },
         });
       });
@@ -77,86 +97,152 @@ export default function Contact({ pageContact }) {
     }
   };
 
+  const regex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+  function classErrorOrConfirmation(message) {
+    if (message === true) {
+      return (<i className="icon-confirmation" />);
+    } if (message === false) {
+      return (<i className="icon-error" />);
+    }
+    return '';
+  }
+
   function createMarkup(data) {
     return { __html: data };
   }
+
   return (
     <div>
+      {state.toogleConfirmation ? (
+        <>
+          <div className="blur" />
+          <Confirmation onClickConfirmation={onClickConfirmation} />
+        </>
+      ) : ''}
       <header>
         <Image
           src={pageContact.imgHeader.path}
           alt={pageContact.title}
           width={pageContact.imgHeader.width}
           height={pageContact.imgHeader.height}
+          layout="intrinsic"
         />
         <h1>{pageContact.title}</h1>
       </header>
-      <main className={styles.contact}>
-        <div className={styles.contact__adress}>
-          <div
-            className={styles.contact__adress__content}
-            dangerouslySetInnerHTML={createMarkup(pageContact.contents)}
-          />
-          <div
-            className={styles.contact__adress__map}
-            dangerouslySetInnerHTML={createMarkup(pageContact.contents2)}
-          />
+      <main>
+        <div className={styles.contact}>
+          <div className={styles.contact__adress}>
+            <h2>Kréa-Tout-Eure</h2>
+            <h3>
+              retrouver-nous sur :
+            </h3>
+            <div className={styles.contact__adress__social}>
+              <a href="https://www.facebook.com/people/Kreatouteure/100064816565302/" target="blank" rel="noreferrer">
+                <i className="icon-facebook" />
+              </a>
+              <a href="http://localhost" target="_blank" rel="noreferrer">
+                <i className="icon-instagram" />
+              </a>
+            </div>
+            <h3>
+              <i className="icon-location" />
+              Adresse du local :
+            </h3>
+            <address>
+              12 rue du Docteur Chanoine , Vernon, France, 27200
+            </address>
+            <div
+              className={styles.contact__adress__map}
+              dangerouslySetInnerHTML={createMarkup(pageContact.contents2)}
+            />
+          </div>
+          <div className={styles.contact__form}>
+            <h2>Formulaire de contact</h2>
+            <form onSubmit={handleSubmit}>
+              <div className="input">
+                <span>
+                  Contactez Kréa Tout Eure ou le webmaster ?
+                </span>
+                <select
+                  onChange={(e) => setState({
+                    ...state,
+                    form: { ...state.form, contactTo: e.target.value },
+                  })}
+                  value={state.form.contactTo}
+                >
+                  <option value="assoc">Kréa Tout Eure</option>
+                  <option value="webmaster">Webmaster</option>
+                </select>
+              </div>
+              <div className={styles.contact__form__input}>
+                <span>
+                  Votre Nom
+                  {classErrorOrConfirmation(state.confirmationName)}
+                </span>
+                <input
+                  type="text"
+                  name="name"
+                  value={state.form.name}
+                  onChange={(e) => setState(
+                    { ...state, form: { ...state.form, name: e.target.value } },
+                  )}
+                  onBlur={(e) => (e.target.value.length > 2 && e.target.value.length < 10
+                    ? setState({ ...state, confirmationName: true })
+                    : null)}
+                  placeholder="Nom Prénom"
+                  required
+                />
+              </div>
+              <div className={styles.contact__form__input}>
+                <span>
+                  Votre email
+                  {classErrorOrConfirmation(state.confirmationEmail)}
+                </span>
+                <input
+                  type="email"
+                  name="email"
+                  value={state.form.email}
+                  placeholder="exemple@email.fr"
+                  required
+                  onChange={(e) => setState(
+                    { ...state, form: { ...state.form, email: e.target.value } },
+                    (e.target.value.length > 2 && e.target.value.length < 35
+                      ? setState({ ...state, confirmationEmail: true })
+                      : setState({ ...state, confirmationEmail: false })),
+                  )}
+                  onBlur={(e) => (
+                    regex.test(e.target.value)
+                      ? setState({ ...state, confirmationEmail: true })
+                      : setState({ ...state, confirmationEmail: false })
+                  )}
+                />
+              </div>
+              <div className={styles.contact__form__textarea}>
+                <span>
+                  Message
+                  {classErrorOrConfirmation(state.confirmationMessage)}
+                </span>
+                <textarea
+                  rows={state.textArea}
+                  value={state.form.message}
+                  onChange={handleChangeMessage}
+                  onBlur={(e) => (e.target.value.length > 2 && e.target.value.length < 250
+                    ? setState({ ...state, confirmationMessage: true })
+                    : null)}
+                  name="message"
+                  wrap="off"
+                  placeholder="Votre message"
+                  required
+                />
+              </div>
+              <button type="submit" className="button-submit">
+                Envoyer
+                <i className="icon-paper-plane" />
+              </button>
+            </form>
+          </div>
         </div>
-
-        <form onSubmit={handleSubmit} className={styles.contact__form}>
-          <div className="input">
-            Contactez Kréa Tout Eure ou le webmaster ?
-            <select
-              onChange={(e) => setState({
-                ...state,
-                form: { ...state.form, contactTo: e.target.value },
-              })}
-              value={state.form.contactTo}
-            >
-              <option value="assoc">Kréa Tout Eure</option>
-              <option value="webmaster">Webmaster</option>
-            </select>
-          </div>
-          <div className="input">
-            Nom
-            <input
-              type="text"
-              name="name"
-              value={state.form.name}
-              onChange={(e) => setState(
-                { ...state, form: { ...state.form, name: e.target.value } },
-              )}
-              placeholder="Nom Prénom"
-              required
-            />
-          </div>
-          <div className="input">
-            Email
-            <input
-              type="email"
-              name="email"
-              value={state.form.email}
-              onChange={(e) => setState(
-                { ...state, form: { ...state.form, email: e.target.value } },
-              )}
-              placeholder="exemple@email.fr"
-              required
-            />
-          </div>
-          <div className="textarea">
-            Message
-            <textarea
-              rows={state.textArea}
-              value={state.form.message}
-              onChange={handleChangeMessage}
-              name="message"
-              wrap="off"
-              placeholder="Votre message"
-              required
-            />
-          </div>
-          <button type="submit">Envoyer</button>
-        </form>
       </main>
     </div>
   );
