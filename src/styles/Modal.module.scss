@@ -28,6 +28,19 @@
     height: 50vh;
     background-color: $color-primary;
     z-index: 3;
+    &__close i{
+        position: absolute;
+        top: 0;
+        right: 0;
+        font-size: 2rem;
+        cursor: pointer;
+        padding: 1rem;
+        text-shadow: 0 4px 30px rgba(255, 255, 255, 0.493);
+        transition: all 0.3s ease-in-out;
+        &:hover{
+          transform: scale(1.2);
+        }
+    }
     & h2{
         margin: 0;
         padding: 0;

@@ -17,8 +17,7 @@ export async function getStaticProps() {
   return { props: { pageHome, thumbnail, base64 } };
 }
 
-export default function Index({ thumbnail, base64, pageHome, cookiesGoogle }) {
-  console.log(cookiesGoogle);
+export default function Index({ thumbnail, base64, pageHome }) {
   return (
     <>
       <header className={styles.home__header}>

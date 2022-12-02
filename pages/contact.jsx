@@ -22,20 +22,14 @@ export default function Contact({ pageContact }) {
     confirmationEmail: null,
     confirmationMessage: null,
     toogleConfirmation: false,
-    cookiesGoogle: '',
+    cookiesGoogle: null,
   });
 
   useEffect(() => {
-    const cookieslocalStorage = window.localStorage.getItem('cookiesGoogle');
-    setState({ ...state, cookiesGoogle: cookieslocalStorage });
+    const cookiesGoogleParam = window.localStorage.getItem('cookiesGoogle') === 'true';
+    setState({ ...state, cookiesGoogle: cookiesGoogleParam });
   }, []);
   console.log(state.cookiesGoogle);
-  const onClickConfirmation = () => {
-    setState({
-      ...state,
-      toogleConfirmation: false,
-    });
-  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -113,7 +107,7 @@ export default function Contact({ pageContact }) {
     return '';
   }
 
-  function createMarkup(data) {
+  function htmlMarkup(data) {
     return { __html: data };
   }
 
@@ -160,7 +154,7 @@ export default function Contact({ pageContact }) {
             {state.cookiesGoogle ? (
               <div
                 className={styles.contact__adress__map}
-                dangerouslySetInnerHTML={createMarkup(pageContact.contents2)}
+                dangerouslySetInnerHTML={htmlMarkup(pageContact.contents2)}
               />
             ) : ''}
           </div>
