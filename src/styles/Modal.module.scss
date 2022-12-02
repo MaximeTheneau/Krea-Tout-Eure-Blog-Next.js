@@ -25,22 +25,40 @@
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 50vh;
+    height: 60%;
+    min-height: 60%;
     background-color: $color-primary;
     z-index: 3;
-    &__close i{
-        position: absolute;
-        top: 0;
-        right: 0;
-        font-size: 2rem;
-        cursor: pointer;
-        padding: 1rem;
-        text-shadow: 0 4px 30px rgba(255, 255, 255, 0.493);
-        transition: all 0.3s ease-in-out;
-        &:hover{
-          transform: scale(1.2);
+    &__choice{
+        width: $margin-card;
+        margin: auto;
+        &__table{
+            width: $margin-card;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-evenly;
+            font-weight: 900;
+            margin: 0 0 1rem 0;
+            & i{
+                font-size: 2.5rem;
+                cursor: pointer;
+                text-shadow: $text-shadow-black;
+            }
         }
+        & button{
+            width: 100%;
+            font-size: $font-size-large;
+            padding: 1rem 2rem;
+            margin: 0 0 1rem 0;
+            transition: all 0.3s easer-in-out; 
+            &:hover{
+                background-color: $color-primary-opacity;
+                transform: scale(1.05);
+            }
+        }
+
     }
+
     & h2{
         margin: 0;
         padding: 0;
@@ -70,6 +88,20 @@
 
 
 @media screen and (min-width: 720px){
+    .cookies{
+        &__choice{
+            width: $margin-card-720;
+        }
+        & p{
+            width: 60%;
+            font-size: $font-size-small;
+        }
+        &__button{
+            & button{
+                width: 20%;
+            }
+        }
+    }
 }
 @media screen and (min-width: 1020px){
     .modal{
@@ -78,6 +110,17 @@
         &_img{
             width: 50%;
             margin: 0 auto;
+        }
+    }
+    .cookies{
+        & p{
+            width: 60%;
+            font-size: $font-size-small;
+        }
+        &__button{
+            & button{
+                width: 20%;
+            }
         }
     }
 }

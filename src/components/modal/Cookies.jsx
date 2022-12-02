@@ -24,10 +24,33 @@ export default function Cookies({ setCookiesModal }) {
   return (
     <div className={style.cookies}>
       {state.cookiesChoice ? (
-        <div className={style.cookies__choice}>
+        <div className={`card ${style.cookies__choice}`}>
+          <h2>Les cookies</h2>
+          <p>
+            Les cookies sont Utilisé pour mesurer notre audience et améliorer nos contenus.
+            <br />
+            En désactivant les cookies, vous ne pourrez pas utiliser certaines fonctionnalités
+            de notre site.
+          </p>
+          <div className={`card ${style.cookies__choice__table}`}>
+            <div className={style.cookies__choice__table__row}>
+              Tout cocher
+            </div>
+            <div className={style.cookies__choice__table__row}>
+              {googleChoice()}
+            </div>
+          </div>
+          <div className={`card ${style.cookies__choice__table}`}>
+            <div className={style.cookies__choice__table__row}>
+              Google Maps et Google Analytics
+            </div>
+            <div className={style.cookies__choice__table__row}>
+              {googleChoice()}
+            </div>
+          </div>
           <div className={style.cookies__close}>
-            <i
-              className="icon-close"
+            <button
+              type="button"
               onClick={() => {
                 setState({
                   ...state,
@@ -37,32 +60,12 @@ export default function Cookies({ setCookiesModal }) {
                 window.localStorage.setItem('cookiesModal', false);
                 setCookiesModal(false);
               }}
-              role="presentation"
-            />
+            >
+              Je valide
+            </button>
+
           </div>
-          <h2>Les cookies</h2>
-          <p>
-            Les cookies sont Utilisé pour mesurer notre audience et améliorer nos contenus.
-            <br />
-            En désactivant les cookies, vous ne pourrez pas utiliser certaines fonctionnalités
-            de notre site.
-          </p>
-          <table>
-            <thead>
-              <tr>
-                <th>Tout cocher</th>
-                <th>
-                  {googleChoice()}
-                </th>
-              </tr>
-              <tr>
-                <th scope="col">Google Maps et Google Analytics</th>
-                <th scope="col">
-                  {googleChoice()}
-                </th>
-              </tr>
-            </thead>
-          </table>
+
         </div>
       ) : (
         <>
