@@ -131,7 +131,7 @@ export default function Contact({ pageContact }) {
       </header>
       <main>
         <div className={styles.contact}>
-          <div className={styles.contact__adress}>
+          <div className={`card ${styles.contact__adress}`}>
             <h2>Kréa-Tout-Eure</h2>
             <h3>
               retrouver-nous sur :
@@ -158,7 +158,7 @@ export default function Contact({ pageContact }) {
               />
             ) : ''}
           </div>
-          <div className={styles.contact__form}>
+          <div className={`card ${styles.contact__form}`}>
             <h2>Formulaire de contact</h2>
             <form onSubmit={handleSubmit}>
               <div className="input">
