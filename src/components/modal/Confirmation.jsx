@@ -4,7 +4,6 @@ export default function confirmation({onClickConfirmation}) {
   setTimeout(() => {
     onClickConfirmation();
   }, 10000);
-
   return (
 
     <div className={styleModal.modal}>

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import Thumbnail from '../src/components/thumbnail';
 import styles from '../src/styles/Home.module.scss';
 

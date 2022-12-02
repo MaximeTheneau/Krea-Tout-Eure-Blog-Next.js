@@ -125,18 +125,18 @@ hr{
   width: 90%;
 }
 
-//* Message Modal
-.change{
-  color: grey;
+.card{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  background: $color-glass;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 1rem;
+  margin: 0 auto;
 }
-.confirmation{
-  color: green;
-
-}
-.error{
-  color: red;
-}
-
 .blur{
   position: fixed;
   top: 0;
@@ -151,6 +151,9 @@ hr{
 //* Media Queries
 
 @media screen and (min-width: 720px) {
+  .card{
+    width: 84%;
+  }
   header{
     & img{
       width: 30%;
