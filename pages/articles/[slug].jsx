@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import ImagePost from '../../src/components/imagePost';
 import styles from '../../src/styles/Article.module.scss';
 
@@ -32,8 +33,23 @@ export async function getStaticProps({ params }) {
 }
 
 export default function Slug({ post, base64 }) {
+  const descriptionMeta = post.contents === null
+    ? `Articles de blog ${post.title}`
+    : post.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
+
   return (
     <>
+      <Head>
+        <title>{post.title}</title>
+        <meta name="description" content={descriptionMeta} />
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={descriptionMeta} />
+        <meta property="og:site_name" content="https://kreatouteure.fr" />
+        <meta property="og:image" content={post.imgPost.path} />
+      </Head>
+
       <header>
         <h1>{post.title}</h1>
       </header>
