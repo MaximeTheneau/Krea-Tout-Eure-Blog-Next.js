@@ -1,4 +1,5 @@
 import ImagePost from '../../src/components/imagePost';
+import styles from '../../src/styles/Article.module.scss';
 
 export async function getStaticPaths() {
   if (process.env.SKIP_BUILD_STATIC_GENERATION) {
@@ -33,11 +34,19 @@ export async function getStaticProps({ params }) {
 export default function Slug({ post, base64 }) {
   return (
     <>
-      <h1>{post.title}</h1>
-      <ImagePost {...post} {...base64} />
-      <p>{post.contents}</p>
-      <h2>{post.subtitle}</h2>
-      <p>{post.contents2}</p>
+      <header>
+        <h1>{post.title}</h1>
+      </header>
+      <div className={styles.posts}>
+        <div className={styles.posts__images}>
+          <ImagePost {...post} {...base64} />
+        </div>
+        <div className={styles.posts__contents}>
+          <p>{post.contents}</p>
+          <h2>{post.subtitle}</h2>
+          <p>{post.contents2}</p>
+        </div>
+      </div>
     </>
   );
 }

@@ -67,3 +67,8 @@
   content: "\e905";
 
 }
+.icon-close-white:before {
+  content: "\e905";
+  color: $color-white;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 1);
+}  

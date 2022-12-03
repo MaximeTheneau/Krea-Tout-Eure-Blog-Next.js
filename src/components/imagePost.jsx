@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import ImageModal from './modal/Image';
-import styles from '../styles/Image.module.scss';
+import styles from '../styles/Article.module.scss';
 
 export default function ImagePost({
   imgPost, imgPost2, imgPost3, imgPost4, title, base64,
@@ -31,19 +31,19 @@ export default function ImagePost({
         />
       ) : ''}
       {arrayImg.map((img) => img && (
-        <div className={styles.image}>
-          <Image
-            src={img.path}
-            width={img.width}
-            height={img.height}
-            alt={title}
-            layout="responsive"
-            placeholder="blur"
-            blurDataURL={`data:image/jpeg;base64,/${base64}`}
-            className={styles['post-card__img']}
-            onClick={() => onClickModal(img)}
-          />
-        </div>
+        <Image
+          src={img.path}
+          width={img.width}
+          height={img.height}
+          alt={title}
+          style={{
+            width: '250px', height: '250px', objectFit: 'cover', maxWidth: '100%', maxHeight: '100%',
+          }}
+          placeholder="blur"
+          blurDataURL={`data:image/jpeg;base64,/${base64}`}
+          className={styles.posts__images__img}
+          onClick={() => onClickModal(img)}
+        />
       ))}
     </>
   );

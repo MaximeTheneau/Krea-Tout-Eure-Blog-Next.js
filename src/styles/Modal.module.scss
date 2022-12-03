@@ -4,9 +4,10 @@
     max-width: 80%;
     position: fixed;
     width: 80%;
+    margin:0 auto;
     height: 50vh;
     top: 10%;
-    transform: translateX(12%);
+    left: 50%;
     background-color: $color-white;
     border-radius: $border-radius;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
@@ -15,6 +16,35 @@
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+    &__images{
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 101%;
+        height: 102%;
+        backdrop-filter: blur(0.2rem);
+        z-index: 1;
+        &__relative{
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            max-width: $width-general;
+            border-radius: 0.7rem;
+            &__img{
+                position: relative;
+                max-height: 80vh ;
+                height: 100%;
+                width: 100%;
+
+            }
+            &__close{
+                top: 0rem;
+                right: 50%;
+                position: absolute;          
+            }
+        }
+    }
     & button{
         display: block;
     }
@@ -30,10 +60,10 @@
     background-color: $color-primary;
     z-index: 3;
     &__choice{
-        width: $margin-card;
+        width: $width-general;
         margin: auto;
         &__table{
-            width: $margin-card;
+            width: $width-general;
             display: flex;
             flex-direction: row;
             justify-content: space-evenly;
@@ -90,7 +120,7 @@
 @media screen and (min-width: 720px){
     .cookies{
         &__choice{
-            width: $margin-card-720;
+            width: $width-general-720;
         }
         & p{
             width: 60%;
@@ -100,6 +130,10 @@
             & button{
                 width: 20%;
             }
+        }
+    }
+    .modal{
+        &__images{
         }
     }
 }
