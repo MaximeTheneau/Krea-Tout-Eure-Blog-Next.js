@@ -144,8 +144,11 @@ hr{
   backdrop-filter: blur(0.2rem);
   z-index: 1;
 }
-
-
+.relative{
+  position: relative;
+}
+.background{
+}
 //* Media Queries
 
 @media screen and (min-width: 720px) {
