@@ -21,14 +21,14 @@ export default function Index({ thumbnail, base64, pageHome }) {
   return (
     <>
       <header className={styles.home__header}>
-        <div className={styles.home__header__card}>
+        <div className={`card ${styles.home__header__card}`}>
           <div className={styles.home__header__card__img}>
             <Image
               src={pageHome.imgHeader.path}
               alt="Logo Kréa Tout Eure"
               width={250}
               height={250}
-              layout="intrinsic"
+              style={{ width: 'auto', height: 'auto' }}
             />
           </div>
           <div className={styles.home__header__card__contents}>
