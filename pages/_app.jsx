@@ -29,10 +29,6 @@ export default function MyApp({ Component, pageProps }) {
   if (error) return 'An error has occurred.';
   if (!data) return 'Loading...';
 
-  const style = {
-    /*background: `url(${data[1].imgBase64})fixed repeat `,
-    backgroundSize: 'contain',*/
-  };
 
   return (
     <>

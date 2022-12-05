@@ -4,6 +4,9 @@ const path = require('path');
  * @type {import('next-sitemap').IConfig}
  */
 const nextConfig = {
+  siteUrl: process.env.SITE_URL || 'https://localhost:3000',
+  generateRobotsTxt: true,
+  sitemapSize: 7000,
   sassOptions: {
     includePaths: [path.join(__dirname, 'styles')],
   },
@@ -16,7 +19,6 @@ const nextConfig = {
     }],
   },
   rules: {
-    'react/prop-types': 'off',
     'react/jsx-props-no-spreading': 'off',
     'jsx-a11y/no-noninteractive-element-interactions': [
       'error',
