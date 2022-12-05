@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://localhost:3000
+Host: https://kreatouteure.fr
 
 # Sitemaps
-Sitemap: https://localhost:3000/sitemap.xml
+Sitemap: https://kreatouteure.fr/sitemap.xml

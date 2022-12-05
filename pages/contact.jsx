@@ -29,7 +29,6 @@ export default function Contact({ pageContact }) {
   const descriptionMeta = pageContact.contents === null
     ? `Articles de blog ${pageContact.title}`
     : `${pageContact.contents.substring(0, 155).replace(/[\r\n]+/gm, '')}...`;
-  
 
   useEffect(() => {
     const cookiesGoogleParam = window.localStorage.getItem('cookiesGoogle') === 'true';

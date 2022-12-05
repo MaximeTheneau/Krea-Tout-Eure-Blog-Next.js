@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import Thumbnail from '../src/components/thumbnail';
 import styles from '../src/styles/Home.module.scss';
@@ -68,3 +69,26 @@ export default function Index({ thumbnail, base64, pageHome }) {
     </>
   );
 }
+Index.propTypes = {
+  thumbnail: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    contents: PropTypes.string,
+    img: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+  })).isRequired,
+  base64: PropTypes.shape({
+    base64: PropTypes.string,
+  }).isRequired,
+  pageHome: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    subtitle: PropTypes.string.isRequired,
+    contents: PropTypes.string,
+    imgHeader: PropTypes.shape({
+      path: PropTypes.string.isRequired,
+      alt: PropTypes.string,
+    }),
+  }).isRequired,
+};
+

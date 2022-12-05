@@ -1,10 +1,7 @@
-import useSWR from 'swr';
 import { useEffect, useState } from 'react';
 import Layout from '../src/components/layout';
 import '../src/styles/globals.scss';
 import Cookies from '../src/components/modal/Cookies';
-
-const fetcher = (url) => fetch(url).then((res) => res.json());
 
 export default function MyApp({ Component, pageProps }) {
   const [cookiesModal, setCookiesModal] = useState(false);
@@ -15,20 +12,16 @@ export default function MyApp({ Component, pageProps }) {
         setTimeout(() => {
           setCookiesModal(true);
         }, 1000);
-      } if (cookiesModalParam === false && cookiesModalParam === true) {
+      }
+
+      if (cookiesModalParam === true) {
         setCookiesModal(false);
       }
       return '';
     }
     const cookiesModalParam = window.localStorage.getItem('cookiesModal');
-    const cookiesGoogleParam = window.localStorage.getItem('cookiesGoogle');
-    cookiesStorage(cookiesModalParam, cookiesGoogleParam);
+    cookiesStorage(cookiesModalParam);
   }, []);
-
-  const { data, error } = useSWR('http://localhost:8000/api/placeholder', fetcher);
-  if (error) return 'An error has occurred.';
-  if (!data) return 'Loading...';
-
 
   return (
     <>

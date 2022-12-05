@@ -1,7 +1,6 @@
 const path = require('path');
 /**
  * @type {import('next').NextConfig}
- * @type {import('next-sitemap').IConfig}
  */
 const nextConfig = {
   sassOptions: {
@@ -16,7 +15,6 @@ const nextConfig = {
     }],
   },
   rules: {
-    'react/prop-types': 'off',
     'react/jsx-props-no-spreading': 'off',
     'jsx-a11y/no-noninteractive-element-interactions': [
       'error',
