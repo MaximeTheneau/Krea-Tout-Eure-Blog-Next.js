@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://kreatouteure.fr
+
+# Sitemaps
+Sitemap: https://kreatouteure.fr/sitemap.xml

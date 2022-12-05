@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
+import Head from 'next/head';
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import Thumbnail from '../src/components/thumbnail';
 import styles from '../src/styles/Home.module.scss';
@@ -18,21 +20,36 @@ export async function getStaticProps() {
 }
 
 export default function Index({ thumbnail, base64, pageHome }) {
+  const descriptionMeta = pageHome.contents === null
+    ? `Articles de blog ${pageHome.title}`
+    : `${pageHome.contents.substring(0, 155).replace(/[\r\n]+/gm, '')}...`;
+
   return (
     <>
+      <Head>
+        <title>{pageHome.subtitle}</title>
+        <meta name="description" content={descriptionMeta} />
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={pageHome.subtitle} />
+        <meta property="og:description" content={descriptionMeta} />
+        <meta property="og:site_name" content="https://kreatouteure.fr" />
+        <meta property="og:image" content={pageHome.imgHeader.path} />
+      </Head>
+
       <header className={styles.home__header}>
         <div className={`card ${styles.home__header__card}`}>
           <div className={styles.home__header__card__img}>
             <Image
               src={pageHome.imgHeader.path}
-              alt="Logo Kréa Tout Eure"
+              alt={`logo ${pageHome.subtitle}`}
               width={250}
               height={250}
               style={{ width: 'auto', height: 'auto' }}
             />
           </div>
           <div className={styles.home__header__card__contents}>
-            <h1>Kréa Tout Eure, le Blog</h1>
+            <h1>{pageHome.subtitle}</h1>
           </div>
           <div className={styles.home__header__card__contents2}>
             <p>{pageHome.contents}</p>
@@ -52,3 +69,26 @@ export default function Index({ thumbnail, base64, pageHome }) {
     </>
   );
 }
+Index.propTypes = {
+  thumbnail: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    contents: PropTypes.string,
+    img: PropTypes.string.isRequired,
+    date: PropTypes.string.isRequired,
+    author: PropTypes.string.isRequired,
+  })).isRequired,
+  base64: PropTypes.shape({
+    base64: PropTypes.string,
+  }).isRequired,
+  pageHome: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    subtitle: PropTypes.string.isRequired,
+    contents: PropTypes.string,
+    imgHeader: PropTypes.shape({
+      path: PropTypes.string.isRequired,
+      alt: PropTypes.string,
+    }),
+  }).isRequired,
+};
+

@@ -1,3 +1,4 @@
+import Head from 'next/head';
 import ImagePost from '../../src/components/imagePost';
 import styles from '../../src/styles/Article.module.scss';
 
@@ -32,8 +33,50 @@ export async function getStaticProps({ params }) {
 }
 
 export default function Slug({ post, base64 }) {
+  const descriptionMeta = post.contents === null
+    ? `Articles de blog ${post.title}`
+    : post.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
+
   return (
     <>
+      <Head>
+        <title>{post.title}</title>
+        <meta name="description" content={descriptionMeta} />
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={post.title} />
+        <meta property="og:description" content={descriptionMeta} />
+        <meta property="og:site_name" content="https://kreatouteure.fr" />
+        <meta property="og:image" content={post.imgPost.path} />
+
+        <script type="application/ld+json">
+          {`{
+            "@context":"https://schema.org/",
+            "@type":"NewsArticle",
+            "name":"${post.title}",
+            "about": "${descriptionMeta}",
+            "author": { "@type": "Person", "name": "Kréa Tout Eure :'Assos" },
+            "datePublished": "${post.createdAt}",
+            "dateModified": "${post.updatedAt}",
+            "description": "${descriptionMeta}",
+            "headline": "${post.title}",
+            "image": [
+              "${post.imgPost.path}",
+              "${post.imgPost2 === null ? '' : post.imgPost2.path}",
+              "${post.imgPost3 === null ? '' : post.imgPost3.path}",
+              "${post.imgPost4 === null ? '' : post.imgPost4.path}"
+            ],
+            "inLanguage": "French",
+            "mainEntityOfPage": "https://kreatouteure.fr",
+            "publisher": { "@id": "Kréa Tout Eure" },
+            "sourceOrganization": "Kréa Tout Eure :'Assosiation",
+            "url": "https://kreatouteure.fr/articles/${post.slug}"
+          }
+    `}
+
+        </script>
+      </Head>
+
       <header>
         <h1>{post.title}</h1>
       </header>
