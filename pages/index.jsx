@@ -19,15 +19,19 @@ export async function getStaticProps() {
 }
 
 export default function Index({ thumbnail, base64, pageHome }) {
+  const descriptionMeta = pageHome.contents === null
+    ? `Articles de blog ${pageHome.title}`
+    : `${pageHome.contents.substring(0, 155).replace(/[\r\n]+/gm, '')}...`;
+
   return (
     <>
       <Head>
         <title>{pageHome.subtitle}</title>
-        <meta name="description" content={pageHome.contents2} />
+        <meta name="description" content={descriptionMeta} />
         {/* Open Graph */}
         <meta property="og:type" content="website" />
         <meta property="og:title" content={pageHome.subtitle} />
-        <meta property="og:description" content={pageHome.contents2} />
+        <meta property="og:description" content={descriptionMeta} />
         <meta property="og:site_name" content="https://kreatouteure.fr" />
         <meta property="og:image" content={pageHome.imgHeader.path} />
       </Head>

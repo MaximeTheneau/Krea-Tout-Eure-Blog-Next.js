@@ -48,6 +48,33 @@ export default function Slug({ post, base64 }) {
         <meta property="og:description" content={descriptionMeta} />
         <meta property="og:site_name" content="https://kreatouteure.fr" />
         <meta property="og:image" content={post.imgPost.path} />
+
+        <script type="application/ld+json">
+          {`{
+            "@context":"https://schema.org/",
+            "@type":"NewsArticle",
+            "name":"${post.title}",
+            "about": "${descriptionMeta}",
+            "author": { "@type": "Person", "name": "Kréa Tout Eure :'Assos" },
+            "datePublished": "${post.createdAt}",
+            "dateModified": "${post.updatedAt}",
+            "description": "${descriptionMeta}",
+            "headline": "${post.title}",
+            "image": [
+              "${post.imgPost.path}",
+              "${post.imgPost2 === null ? '' : post.imgPost2.path}",
+              "${post.imgPost3 === null ? '' : post.imgPost3.path}",
+              "${post.imgPost4 === null ? '' : post.imgPost4.path}"
+            ],
+            "inLanguage": "French",
+            "mainEntityOfPage": "https://kreatouteure.fr",
+            "publisher": { "@id": "Kréa Tout Eure" },
+            "sourceOrganization": "Kréa Tout Eure :'Assosiation",
+            "url": "https://kreatouteure.fr/articles/${post.slug}"
+          }
+    `}
+
+        </script>
       </Head>
 
       <header>

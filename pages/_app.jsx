@@ -30,14 +30,14 @@ export default function MyApp({ Component, pageProps }) {
   if (!data) return 'Loading...';
 
   const style = {
-    background: `url(${data[1].imgBase64})fixed repeat `,
-    backgroundSize: 'contain',
+    /*background: `url(${data[1].imgBase64})fixed repeat `,
+    backgroundSize: 'contain',*/
   };
 
   return (
     <>
       {cookiesModal ? <Cookies setCookiesModal={setCookiesModal} /> : ''}
-      <div style={style} className="background">
+      <div className="background">
         <Layout {...pageProps}>
           <Component {...pageProps} />
         </Layout>

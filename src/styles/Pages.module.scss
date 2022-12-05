@@ -1,0 +1,19 @@
+@import './variables.scss';
+
+.pages{
+    padding: $paddin-card;
+    width: $width-general;
+
+}
+
+//* Media Queries
+
+@media screen and (min-width: 720px) {
+    .pages{
+
+    }
+}
+  
+@media screen and (min-width: 1024px) {
+}
+  

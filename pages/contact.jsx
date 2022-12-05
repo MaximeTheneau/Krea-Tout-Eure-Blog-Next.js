@@ -1,10 +1,11 @@
 import Image from 'next/image';
+import Head from 'next/head';
 import { useEffect, useState } from 'react';
 import styles from '../src/styles/Contact.module.scss';
 import Confirmation from '../src/components/modal/Confirmation';
 
 export async function getStaticProps() {
-  const res = await fetch('http://localhost:8000/api/pages/Contact');
+  const res = await fetch('http://localhost:8000/api/pages/Contactez-nous');
   const pageContact = await res.json();
   return { props: { pageContact } };
 }
@@ -25,11 +26,16 @@ export default function Contact({ pageContact }) {
     cookiesGoogle: null,
   });
 
+  const descriptionMeta = pageContact.contents === null
+    ? `Articles de blog ${pageContact.title}`
+    : `${pageContact.contents.substring(0, 155).replace(/[\r\n]+/gm, '')}...`;
+  
+
   useEffect(() => {
     const cookiesGoogleParam = window.localStorage.getItem('cookiesGoogle') === 'true';
     setState({ ...state, cookiesGoogle: cookiesGoogleParam });
   }, []);
-  console.log(state.cookiesGoogle);
+  console.log(pageContact);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -113,6 +119,17 @@ export default function Contact({ pageContact }) {
 
   return (
     <div>
+      <Head>
+        <title>{pageContact.subtitle}</title>
+        <meta name="description" content={descriptionMeta} />
+        {/* Open Graph */}
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={pageContact.subtitle} />
+        <meta property="og:description" content={descriptionMeta} />
+        <meta property="og:site_name" content="https://kreatouteure.fr" />
+        <meta property="og:image" content={pageContact.imgHeader.path} />
+      </Head>
+
       {state.toogleConfirmation === 'false' ? (
         <>
           <div className="blur" />
@@ -128,6 +145,7 @@ export default function Contact({ pageContact }) {
           layout="intrinsic"
         />
         <h1>{pageContact.title}</h1>
+        <p>{pageContact.contents}</p>
       </header>
       <main>
         <div className={styles.contact}>
