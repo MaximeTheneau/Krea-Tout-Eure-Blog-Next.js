@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { string } from 'prop-types';
 import ImagePost from '../../src/components/imagePost';
 import styles from '../../src/styles/Article.module.scss';
 

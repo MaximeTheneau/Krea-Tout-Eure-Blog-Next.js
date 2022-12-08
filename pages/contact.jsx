@@ -11,6 +11,7 @@ export async function getStaticProps() {
 }
 
 export default function Contact({ pageContact }) {
+  console.log('test');
   const [state, setState] = useState({
     form: {
       contactTo: 'assoc',
@@ -24,6 +25,10 @@ export default function Contact({ pageContact }) {
     confirmationMessage: null,
     toogleConfirmation: false,
     cookiesGoogle: null,
+    auth:{
+      username: Date.now(),
+      password: 'name',
+    },
   });
 
   const descriptionMeta = pageContact.contents === null
@@ -34,35 +39,32 @@ export default function Contact({ pageContact }) {
     const cookiesGoogleParam = window.localStorage.getItem('cookiesGoogle') === 'true';
     setState({ ...state, cookiesGoogle: cookiesGoogleParam });
   }, []);
-  console.log(pageContact);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const requestOptions = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(state.form),
+      method: 'POST' ,
+      body: JSON.stringify(state.form)
     };
+    console.log(requestOptions);
     fetch('http://localhost:8000/api/contact', requestOptions)
-      .catch(() => (
-        setState({
-          ...state,
-        })
+      .catch((error) => (
+        console.log('error', error)
       ))
       .finally(() => {
-        setState({
-          ...state,
-          toogleConfirmation: true,
-          confirmationName: null,
-          confirmationEmail: null,
-          confirmationMessage: null,
-          form: {
-            contactTo: 'assoc',
-            name: '',
-            email: '',
-            message: '',
-          },
-        });
+        // setState({
+        //   ...state,
+        //   toogleConfirmation: true,
+        //   confirmationName: null,
+        //   confirmationEmail: null,
+        //   confirmationMessage: null,
+        //   form: {
+        //     contactTo: 'assoc',
+        //     name: '',
+        //     email: '',
+        //     message: '',
+        //   },
+        // });
       });
   };
 
@@ -112,6 +114,27 @@ export default function Contact({ pageContact }) {
     return '';
   }
 
+  const requestOptions = {
+    method: 'POST' ,
+    headers: { 
+      'Content-Type': 'application/json'},
+    body: JSON.stringify(state.auth),
+  };
+
+  console.log(requestOptions);
+
+  const blurName = (e) => (
+    e.target.value.length > 2 && e.target.value.length < 10
+    ? (
+      setState({ ...state, confirmationName: true },
+        fetch('http://localhost:8000/api/contact_test', requestOptions)
+        .then((response) => response.json())
+        .catch((error) => (
+          console.log('error', error)
+        ))        
+      ))
+    : null)
+
   function htmlMarkup(data) {
     return { __html: data };
   }
@@ -141,7 +164,6 @@ export default function Contact({ pageContact }) {
           alt={pageContact.title}
           width={pageContact.imgHeader.width}
           height={pageContact.imgHeader.height}
-          layout="intrinsic"
         />
         <h1>{pageContact.title}</h1>
         <p>{pageContact.contents}</p>
@@ -205,9 +227,7 @@ export default function Contact({ pageContact }) {
                   onChange={(e) => setState(
                     { ...state, form: { ...state.form, name: e.target.value } },
                   )}
-                  onBlur={(e) => (e.target.value.length > 2 && e.target.value.length < 10
-                    ? setState({ ...state, confirmationName: true })
-                    : null)}
+                  onBlur={blurName}
                   placeholder="Nom Prénom"
                   required
                 />
