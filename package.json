@@ -8,6 +8,7 @@
     "postBuild": "next-sitemap"
   },
   "dependencies": {
+    "@next/font": "^13.0.6",
     "axios": "^1.2.0",
     "eslint-config-airbnb": "^19.0.4",
     "next": "latest",

@@ -1,11 +1,12 @@
+import PropTypes from 'prop-types';
 import styleModal from '../../styles/Modal.module.scss';
 
-export default function confirmation({onClickConfirmation}) {
+
+export default function confirmation({ onClickConfirmation }) {
   setTimeout(() => {
     onClickConfirmation();
   }, 10000);
   return (
-
     <div className={styleModal.modal}>
       <h2>Bien Reçu, merci !</h2>
       <p>Votre message a bien été envoyé, on vous réponds aux plus vite</p>
@@ -21,3 +22,7 @@ export default function confirmation({onClickConfirmation}) {
     </div>
   );
 }
+
+confirmation.propTypes = {
+  onClickConfirmation: PropTypes.func.isRequired,
+};

@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Head from 'next/head';
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import styles from '../src/styles/Contact.module.scss';
 import Confirmation from '../src/components/modal/Confirmation';
@@ -34,20 +35,16 @@ export default function Contact({ pageContact }) {
     const cookiesGoogleParam = window.localStorage.getItem('cookiesGoogle') === 'true';
     setState({ ...state, cookiesGoogle: cookiesGoogleParam });
   }, []);
-  console.log(pageContact);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const requestOptions = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(state.form),
     };
     fetch('http://localhost:8000/api/contact', requestOptions)
-      .catch(() => (
-        setState({
-          ...state,
-        })
+      .catch((error) => (
+        console.log('error', error)
       ))
       .finally(() => {
         setState({
@@ -75,8 +72,6 @@ export default function Contact({ pageContact }) {
         ...state.form, message: e.target.value, confirmationMessage: 'change',
       },
     });
-    const textareaheight = state.textArea;
-    console.log(textareaheight);
     if (e.target.value.length > 250) {
       setState({
         ...state,
@@ -112,6 +107,10 @@ export default function Contact({ pageContact }) {
     return '';
   }
 
+  const onClickConfirmation = () => {
+    setState({ ...state, toogleConfirmation: false });
+  };
+
   function htmlMarkup(data) {
     return { __html: data };
   }
@@ -129,7 +128,7 @@ export default function Contact({ pageContact }) {
         <meta property="og:image" content={pageContact.imgHeader.path} />
       </Head>
 
-      {state.toogleConfirmation === 'false' ? (
+      {state.toogleConfirmation ? (
         <>
           <div className="blur" />
           <Confirmation onClickConfirmation={onClickConfirmation} />
@@ -141,7 +140,6 @@ export default function Contact({ pageContact }) {
           alt={pageContact.title}
           width={pageContact.imgHeader.width}
           height={pageContact.imgHeader.height}
-          layout="intrinsic"
         />
         <h1>{pageContact.title}</h1>
         <p>{pageContact.contents}</p>
@@ -205,9 +203,6 @@ export default function Contact({ pageContact }) {
                   onChange={(e) => setState(
                     { ...state, form: { ...state.form, name: e.target.value } },
                   )}
-                  onBlur={(e) => (e.target.value.length > 2 && e.target.value.length < 10
-                    ? setState({ ...state, confirmationName: true })
-                    : null)}
                   placeholder="Nom Prénom"
                   required
                 />
@@ -265,3 +260,17 @@ export default function Contact({ pageContact }) {
     </div>
   );
 }
+
+Contact.propTypes = {
+  pageContact: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    subtitle: PropTypes.string.isRequired,
+    contents: PropTypes.string.isRequired,
+    contents2: PropTypes.string.isRequired,
+    imgHeader: PropTypes.shape({
+      path: PropTypes.string.isRequired,
+      width: PropTypes.number.isRequired,
+      height: PropTypes.number.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
