@@ -6,8 +6,9 @@
     width: 80%;
     margin:0 auto;
     height: 50vh;
-    top: 10%;
+    top: 50%;
     left: 50%;
+    transform: translate(-50%, -50%);
     background-color: $color-white;
     border-radius: $border-radius;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
@@ -138,8 +139,6 @@
 }
 @media screen and (min-width: 1020px){
     .modal{
-        width: 70%;
-        left: 15%;
         &_img{
             width: 50%;
             margin: 0 auto;

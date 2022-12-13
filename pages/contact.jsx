@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import Head from 'next/head';
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import styles from '../src/styles/Contact.module.scss';
 import Confirmation from '../src/components/modal/Confirmation';
@@ -11,7 +12,6 @@ export async function getStaticProps() {
 }
 
 export default function Contact({ pageContact }) {
-  console.log('test');
   const [state, setState] = useState({
     form: {
       contactTo: 'assoc',
@@ -25,10 +25,6 @@ export default function Contact({ pageContact }) {
     confirmationMessage: null,
     toogleConfirmation: false,
     cookiesGoogle: null,
-    auth:{
-      username: Date.now(),
-      password: 'name',
-    },
   });
 
   const descriptionMeta = pageContact.contents === null
@@ -43,28 +39,27 @@ export default function Contact({ pageContact }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const requestOptions = {
-      method: 'POST' ,
-      body: JSON.stringify(state.form)
+      method: 'POST',
+      body: JSON.stringify(state.form),
     };
-    console.log(requestOptions);
     fetch('http://localhost:8000/api/contact', requestOptions)
       .catch((error) => (
         console.log('error', error)
       ))
       .finally(() => {
-        // setState({
-        //   ...state,
-        //   toogleConfirmation: true,
-        //   confirmationName: null,
-        //   confirmationEmail: null,
-        //   confirmationMessage: null,
-        //   form: {
-        //     contactTo: 'assoc',
-        //     name: '',
-        //     email: '',
-        //     message: '',
-        //   },
-        // });
+        setState({
+          ...state,
+          toogleConfirmation: true,
+          confirmationName: null,
+          confirmationEmail: null,
+          confirmationMessage: null,
+          form: {
+            contactTo: 'assoc',
+            name: '',
+            email: '',
+            message: '',
+          },
+        });
       });
   };
 
@@ -77,8 +72,6 @@ export default function Contact({ pageContact }) {
         ...state.form, message: e.target.value, confirmationMessage: 'change',
       },
     });
-    const textareaheight = state.textArea;
-    console.log(textareaheight);
     if (e.target.value.length > 250) {
       setState({
         ...state,
@@ -114,26 +107,9 @@ export default function Contact({ pageContact }) {
     return '';
   }
 
-  const requestOptions = {
-    method: 'POST' ,
-    headers: { 
-      'Content-Type': 'application/json'},
-    body: JSON.stringify(state.auth),
+  const onClickConfirmation = () => {
+    setState({ ...state, toogleConfirmation: false });
   };
-
-  console.log(requestOptions);
-
-  const blurName = (e) => (
-    e.target.value.length > 2 && e.target.value.length < 10
-    ? (
-      setState({ ...state, confirmationName: true },
-        fetch('http://localhost:8000/api/contact_test', requestOptions)
-        .then((response) => response.json())
-        .catch((error) => (
-          console.log('error', error)
-        ))        
-      ))
-    : null)
 
   function htmlMarkup(data) {
     return { __html: data };
@@ -152,7 +128,7 @@ export default function Contact({ pageContact }) {
         <meta property="og:image" content={pageContact.imgHeader.path} />
       </Head>
 
-      {state.toogleConfirmation === 'false' ? (
+      {state.toogleConfirmation ? (
         <>
           <div className="blur" />
           <Confirmation onClickConfirmation={onClickConfirmation} />
@@ -227,7 +203,6 @@ export default function Contact({ pageContact }) {
                   onChange={(e) => setState(
                     { ...state, form: { ...state.form, name: e.target.value } },
                   )}
-                  onBlur={blurName}
                   placeholder="Nom Prénom"
                   required
                 />
@@ -285,3 +260,17 @@ export default function Contact({ pageContact }) {
     </div>
   );
 }
+
+Contact.propTypes = {
+  pageContact: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    subtitle: PropTypes.string.isRequired,
+    contents: PropTypes.string.isRequired,
+    contents2: PropTypes.string.isRequired,
+    imgHeader: PropTypes.shape({
+      path: PropTypes.string.isRequired,
+      width: PropTypes.number.isRequired,
+      height: PropTypes.number.isRequired,
+    }).isRequired,
+  }).isRequired,
+};
