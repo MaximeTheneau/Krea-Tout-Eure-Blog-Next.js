@@ -17,8 +17,6 @@ export default function ImageModal({
           style={{
             width: 'auto',
             height: 'auto',
-            maxWidth: '100%',
-            maxHeight: '100%',
           }}
           className={styleModal.modal__images__relative__img}
           onClick={onClickModal}

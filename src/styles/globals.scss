@@ -43,7 +43,6 @@ button{
     font-weight: 700;
     padding: 0.5rem 1rem;
     margin: 1rem 0;
-    transition: color 1s linear;
     & i{
       padding: 0 0 0 1rem ;
     }
@@ -63,11 +62,6 @@ button{
       box-shadow: 0 15px 35px rgba(0, 0, 0, 0.11);
       color: #fff;
       }
-    
-
-    &:hover{
-      transition: color 1s linear;
-    }
 }
 
 
@@ -110,14 +104,16 @@ img{
   max-width: 100%;
   margin: auto;
 }
-a:hover{
-  color: $color-blue;
+a:hover,
+button:hover {
+  color: $color-krea;
   text-shadow: 0 0 0.2rem $color-white;
 }
 header{
   background: $color-primary-gradient;
   padding: 1rem;
   margin: 0 0 1rem 0;
+  
   & img{
     width: 50%;
   }
