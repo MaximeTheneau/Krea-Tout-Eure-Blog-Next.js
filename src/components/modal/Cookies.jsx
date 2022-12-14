@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import style from '../../styles/Modal.module.scss';
 
@@ -105,3 +106,7 @@ export default function Cookies({ setCookiesModal }) {
     </div>
   );
 }
+
+Cookies.propTypes = {
+  setCookiesModal: PropTypes.func.isRequired,
+};

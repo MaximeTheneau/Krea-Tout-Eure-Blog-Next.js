@@ -118,11 +118,11 @@ export default function Contact({ pageContact }) {
   return (
     <div>
       <Head>
-        <title>{pageContact.subtitle}</title>
+        <title>{pageContact.title}</title>
         <meta name="description" content={descriptionMeta} />
         {/* Open Graph */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content={pageContact.subtitle} />
+        <meta property="og:title" content={pageContact.title} />
         <meta property="og:description" content={descriptionMeta} />
         <meta property="og:site_name" content="https://kreatouteure.fr" />
         <meta property="og:image" content={pageContact.imgHeader.path} />
@@ -135,12 +135,14 @@ export default function Contact({ pageContact }) {
         </>
       ) : ''}
       <header>
-        <Image
+        {/* <Image
           src={pageContact.imgHeader.path}
           alt={pageContact.title}
           width={pageContact.imgHeader.width}
           height={pageContact.imgHeader.height}
-        />
+          style={{ width: 'auto', height: 'auto' }}
+          priority
+        /> */}
         <h1>{pageContact.title}</h1>
         <p>{pageContact.contents}</p>
       </header>

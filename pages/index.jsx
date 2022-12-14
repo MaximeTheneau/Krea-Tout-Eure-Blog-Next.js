@@ -2,28 +2,23 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Head from 'next/head';
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
 import Thumbnail from '../src/components/thumbnail';
 import styles from '../src/styles/Home.module.scss';
 
 export async function getStaticProps() {
-  const resBase64 = await fetch('http://localhost:8000/api/placeholder');
-  const base64 = await resBase64.json();
-
   const resPost = await fetch('http://localhost:8000/api/posts/thumbnail');
   const thumbnail = await resPost.json();
 
   const res = await fetch('http://localhost:8000/api/pages/Accueil');
   const pageHome = await res.json();
 
-  return { props: { pageHome, thumbnail, base64 } };
+  return { props: { pageHome, thumbnail } };
 }
 
-export default function Index({ thumbnail, base64, pageHome }) {
+export default function Index({ thumbnail, pageHome }) {
   const descriptionMeta = pageHome.contents === null
     ? `Articles de blog ${pageHome.title}`
     : `${pageHome.contents.substring(0, 155).replace(/[\r\n]+/gm, '')}...`;
-
   return (
     <>
       <Head>
@@ -46,6 +41,7 @@ export default function Index({ thumbnail, base64, pageHome }) {
               width={250}
               height={250}
               style={{ width: 'auto', height: 'auto' }}
+              priority
             />
           </div>
           <div className={styles.home__header__card__contents}>
@@ -62,7 +58,12 @@ export default function Index({ thumbnail, base64, pageHome }) {
       <div className={styles.home__cards}>
         {
           thumbnail.map((post) => (
-            <Thumbnail key={post.id} {...post} {...base64} />
+            <Thumbnail
+              key={post.id}
+              imgThumbnail={post.imgThumbnail}
+              title={post.title}
+              slug={post.slug}
+            />
           ))
         }
       </div>
@@ -71,16 +72,11 @@ export default function Index({ thumbnail, base64, pageHome }) {
 }
 Index.propTypes = {
   thumbnail: PropTypes.arrayOf(PropTypes.shape({
-    id: PropTypes.string.isRequired,
+    id: PropTypes.number.isRequired,
     title: PropTypes.string.isRequired,
-    contents: PropTypes.string,
-    img: PropTypes.string.isRequired,
-    date: PropTypes.string.isRequired,
-    author: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+    imgThumbnail: PropTypes.string.isRequired,
   })).isRequired,
-  base64: PropTypes.shape({
-    base64: PropTypes.string,
-  }).isRequired,
   pageHome: PropTypes.shape({
     title: PropTypes.string.isRequired,
     subtitle: PropTypes.string.isRequired,
@@ -91,4 +87,3 @@ Index.propTypes = {
     }),
   }).isRequired,
 };
-

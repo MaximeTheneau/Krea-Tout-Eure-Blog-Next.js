@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import Link from 'next/link';
 import Image from 'next/image';
 import styles from '../styles/Thumbnail.module.scss';
@@ -12,16 +13,11 @@ export default function thumbnail({
       <div className={`card ${styles.thumbnail}`}>
         <div className={styles.thumbnail__defensive} />
         <div className={styles.thumbnail__img}>
-          <Image
+          <img
             src={imgThumbnail}
             alt={title}
-            placeholder="blur"
-            blurDataURL={`data:image/jpeg;base64,/${base64}`}
-            width={250}
-            height={250}
-            style={{
-              width: '100%', height: '100%', objectFit: 'cover', maxWidth: '100%', maxHeight: '100%',
-            }}
+            width="250"
+            height="250"
           />
         </div>
         <div className={styles.thumbnail__contents}>

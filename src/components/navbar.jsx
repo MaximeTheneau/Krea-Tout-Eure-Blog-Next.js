@@ -13,9 +13,6 @@ export default function Navbar() {
             setToggleNav(false)
           ), 5500)) : null
         )}
-        onMouseUpCapture={() => (
-          console.log('click')
-        )}
       >
         <div
           aria-hidden="true"

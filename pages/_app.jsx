@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import Layout from '../src/components/layout';
 import '../src/styles/globals.scss';
@@ -5,7 +6,7 @@ import Cookies from '../src/components/modal/Cookies';
 
 export default function MyApp({ Component, pageProps }) {
   const [cookiesModal, setCookiesModal] = useState(false);
-  const [background, setBackground] = useState(null);
+  const [background, setBackground] = useState('');
   useEffect(() => {
     async function getBacground() {
       const response = await fetch('http://localhost:8000/api/placeholder');
@@ -38,7 +39,6 @@ export default function MyApp({ Component, pageProps }) {
           min-height: 100vh;
         }
       `}
-
       </style>
       {cookiesModal ? <Cookies setCookiesModal={setCookiesModal} /> : ''}
       <div className="background">
@@ -49,3 +49,8 @@ export default function MyApp({ Component, pageProps }) {
     </>
   );
 }
+
+MyApp.propTypes = {
+  Component: PropTypes.elementType.isRequired,
+  pageProps: PropTypes.shape({}).isRequired,
+};
