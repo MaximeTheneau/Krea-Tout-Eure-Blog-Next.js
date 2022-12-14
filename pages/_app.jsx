@@ -31,17 +31,10 @@ export default function MyApp({ Component, pageProps }) {
   }, []);
   return (
     <>
-      <style jsx>
-        {`
-        .background {
-          background: url(${background}) repeat fixed;
-          background-size: 50%;
-          min-height: 100vh;
-        }
-      `}
-      </style>
       {cookiesModal ? <Cookies setCookiesModal={setCookiesModal} /> : ''}
-      <div className="background">
+      <div className="background" style={{
+        background: `url(${background}) repeat fixed`,
+      }}>
         <Layout {...pageProps}>
           <Component {...pageProps} />
         </Layout>

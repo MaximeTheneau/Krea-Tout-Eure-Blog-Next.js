@@ -10,7 +10,6 @@
     "analyze": "cross-env BUNDLE_ANALYZE=true next build"
   },
   "dependencies": {
-    "@next/font": "^13.0.6",
     "eslint-config-airbnb": "^19.0.4",
     "next": "latest",
     "next-sitemap": "^3.1.32",
