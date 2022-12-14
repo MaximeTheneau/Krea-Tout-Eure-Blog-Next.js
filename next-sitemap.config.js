@@ -1,5 +1,5 @@
 const config = {
-  siteUrl: 'https://kreatouteure.fr',
+  siteUrl: 'https://krea-tout-eure.fr',
   generateRobotsTxt: true,
   changefreq: 'daily',
   priority: 0.7,

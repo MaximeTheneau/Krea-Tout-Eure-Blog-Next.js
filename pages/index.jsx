@@ -38,8 +38,8 @@ export default function Index({ thumbnail, pageHome }) {
             <Image
               src={pageHome.imgHeader.path}
               alt={`logo ${pageHome.subtitle}`}
-              width={250}
-              height={250}
+              width={500}
+              height={500}
               style={{ width: 'auto', height: 'auto' }}
               priority
             />

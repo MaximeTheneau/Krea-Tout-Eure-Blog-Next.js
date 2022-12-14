@@ -9,10 +9,10 @@ const nextConfig = {
   images: {
     unoptimized: true,
     remotePatterns: [{
-      protocol: 'http',
-      hostname: 'localhost',
+      protocol: 'https',
+      hostname: 'back.krea-tout-eure.fr',
       port: '',
-      pathname: '/Krea-Tout-Eure-Blog-Symfony-/public/uploads/images/*',
+      pathname: '/public/uploads/images/*',
     }],
   },
   rules: {

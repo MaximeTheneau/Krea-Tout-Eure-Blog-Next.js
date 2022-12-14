@@ -28,14 +28,15 @@
         height: 100%;
         z-index: 1;
         &__relative{
-            position: relative;
-            max-width: 100%;
-            height: auto;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             &__img{
+                cursor: pointer;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
                 border-radius: $border-radius;
+                max-width: $width-general;
+                max-height: $width-general;
             }
             &__close{
                 margin: auto;
@@ -130,10 +131,6 @@
             & button{
                 width: 20%;
             }
-        }
-    }
-    .modal{
-        &__images{
         }
     }
 }

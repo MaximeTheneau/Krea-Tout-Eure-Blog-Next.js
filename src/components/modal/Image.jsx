@@ -8,13 +8,6 @@ export default function ImageModal({
 }) {
   return (
     <div className={styleModal.modal__images}>
-      <div
-        className={styleModal.modal__images__relative}
-        style={{
-          width,
-          height,
-        }}
-      >
         <Image
           src={path}
           alt={`image ${title} au format ${width}x${height}`}
@@ -24,18 +17,10 @@ export default function ImageModal({
           style={{
             width: 'auto',
             height: 'auto',
-            maxWidth: '100%',
           }}
           className={styleModal.modal__images__relative__img}
-        />
-        <div
-          className={styleModal.modal__images__relative__close}
           onClick={onClickModal}
-          aria-hidden="true"
-        >
-          <i className="icon-close-white" />
-        </div>
-      </div>
+        />
     </div>
   );
 }
