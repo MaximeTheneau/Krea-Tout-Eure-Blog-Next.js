@@ -1,4 +1,6 @@
 import Image from 'next/image';
+import PropTypes from 'prop-types';
+
 import styleModal from '../../styles/Modal.module.scss';
 
 export default function ImageModal({
@@ -37,3 +39,11 @@ export default function ImageModal({
     </div>
   );
 }
+
+ImageModal.propTypes = {
+  path: PropTypes.string.isRequired,
+  width: PropTypes.number.isRequired,
+  height: PropTypes.number.isRequired,
+  title: PropTypes.string.isRequired,
+  onClickModal: PropTypes.func.isRequired,
+};

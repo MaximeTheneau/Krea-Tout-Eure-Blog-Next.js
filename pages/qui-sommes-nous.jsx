@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import PropTypes from 'prop-types';
 import Image from 'next/image';
 import styles from '../src/styles/Pages.module.scss';
 
@@ -16,23 +17,24 @@ export default function QuiSommesNous({ pageAbout }) {
   return (
     <div>
       <Head>
-        <title>{pageAbout.subtitle}</title>
+        <title>{pageAbout.title}</title>
         <meta name="description" content={descriptionMeta} />
         {/* Open Graph */}
         <meta property="og:type" content="website" />
-        <meta property="og:title" content={pageAbout.subtitle} />
+        <meta property="og:title" content={pageAbout.title} />
         <meta property="og:description" content={descriptionMeta} />
         <meta property="og:site_name" content="https://kreatouteure.fr" />
         <meta property="og:image" content={pageAbout.imgHeader.path} />
       </Head>
       <header>
-        <Image
+        {/* <Image
           src={pageAbout.imgHeader.path}
           alt={pageAbout.title}
           width={pageAbout.imgHeader.width}
           height={pageAbout.imgHeader.height}
-          layout="intrinsic"
-        />
+          style={{ width: 'auto', height: 'auto' }}
+          priority
+        /> */}
         <h1>{pageAbout.title}</h1>
       </header>
       <main>
@@ -43,3 +45,16 @@ export default function QuiSommesNous({ pageAbout }) {
     </div>
   );
 }
+
+QuiSommesNous.propTypes = {
+  pageAbout: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    subtitle: PropTypes.string.isRequired,
+    contents: PropTypes.string.isRequired,
+    imgHeader: PropTypes.shape({
+      path: PropTypes.string.isRequired,
+      width: PropTypes.number.isRequired,
+      height: PropTypes.number.isRequired,
+    }).isRequired,
+  }).isRequired,
+};

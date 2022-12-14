@@ -25,6 +25,7 @@
     position: relative;
     & img{
       border-radius: $border-radius;
+      object-fit: cover;
     }
   }
   &__contents{

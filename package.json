@@ -5,11 +5,12 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "postBuild": "next-sitemap"
+    "postBuild": "next-sitemap",
+    "export": "next export",
+    "analyze": "cross-env BUNDLE_ANALYZE=true next build"
   },
   "dependencies": {
     "@next/font": "^13.0.6",
-    "axios": "^1.2.0",
     "eslint-config-airbnb": "^19.0.4",
     "next": "latest",
     "next-sitemap": "^3.1.32",
