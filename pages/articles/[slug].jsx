@@ -44,13 +44,13 @@ export default function Slug({ post, base64 }) {
     if (social === 'facebook') {
       window.open(`https://www.facebook.com/sharer/sharer.php?u=https://krea-tout-eure.fr/articles/${post.slug}`, '_blank');
     } else if (social === 'twitter') {
-      window.open(`https://twitter.com/intent/tweet?url=https://kreatouteure.fr/articles/${post.slug}`, '_blank');
+      window.open(`https://twitter.com/intent/tweet?url=https://krea-tout-eure.fr/articles/${post.slug}`, '_blank');
     } else if (social === 'linkedin') {
-      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=https://kreatouteure.fr/articles/${post.slug}`, '_blank');
+      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=https://krea-tout-eure.fr/articles/${post.slug}`, '_blank');
     } else if (social === 'pinterest') {
-      window.open(`https://pinterest.com/pin/create/button/?url=https://kreatouteure.fr/articles/${post.slug}`, '_blank');
+      window.open(`https://pinterest.com/pin/create/button/?url=https://krea-tout-eure.fr/articles/${post.slug}`, '_blank');
     } else if (social === 'email') {
-      window.open(`mailto:?subject=${post.title}&body=https://kreatouteure.fr/articles/${post.slug}`, '_blank');
+      window.open(`mailto:?subject=${post.title}&body=https://krea-tout-eure.fr/articles/${post.slug}`, '_blank');
     }    
   };
   return (
@@ -62,7 +62,7 @@ export default function Slug({ post, base64 }) {
         <meta property="og:type" content="website" />
         <meta property="og:title" content={post.title} />
         <meta property="og:description" content={descriptionMeta} />
-        <meta property="og:site_name" content="https://kreatouteure.fr" />
+        <meta property="og:site_name" content="https://krea-tout-eure.fr" />
         <meta property="og:image" content={post.imgPost.path} />
         <script type="application/ld+json">
           {`{
@@ -82,10 +82,10 @@ export default function Slug({ post, base64 }) {
               "${post.imgPost4 === null ? '' : post.imgPost4.path}"
             ],
             "inLanguage": "French",
-            "mainEntityOfPage": "https://kreatouteure.fr",
+            "mainEntityOfPage": "https://krea-tout-eure.fr",
             "publisher": { "@id": "Kréa Tout Eure" },
             "sourceOrganization": "Kréa Tout Eure :'Assosiation",
-            "url": "https://kreatouteure.fr/articles/${post.slug}"
+            "url": "https://krea-tout-eure.fr/articles/${post.slug}"
           }
     `}
 
