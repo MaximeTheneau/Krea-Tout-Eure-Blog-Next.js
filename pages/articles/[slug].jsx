@@ -49,7 +49,7 @@ export default function Slug({ post, base64 }) {
         <meta property="og:description" content={descriptionMeta} />
         <meta property="og:site_name" content="https://kreatouteure.fr" />
         <meta property="og:image" content={post.imgPost.path} />
-
+        <meta charset="utf-8" />s
         <script type="application/ld+json">
           {`{
             "@context":"https://schema.org/",
@@ -90,11 +90,11 @@ export default function Slug({ post, base64 }) {
           <h2>{post.subtitle}</h2>
           <p>{post.contents2}</p>
           <div className={styles.posts__contents__social}>
-            <p>Partager sur :</p>
+            <p>Partager sur  &#xe1111;:</p>
             
             <select onChange={(e)=>console.log(e.target.value)}>
               <option value="---">---</option>
-              <option value="instagram" className='iconTheneauM'>{`\e906 Instagram`}</option>
+              <option value="instagram" className='iconTheneauM'>&#xe906; Instagram</option>
               <option value="facebook">&#x Facebook</option>
             </select>
           </div>
