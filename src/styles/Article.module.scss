@@ -1,6 +1,10 @@
 @import './variables.scss';
 
 .posts{
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     &__images{
         display: flex;
         flex-wrap: wrap;
@@ -19,7 +23,7 @@
             margin: 0 auto;
             & select{
             text-align: center;
-            background: $color-blue !important;
+            background: $color-primary-opacity !important;
             opacity: 0.8;
             }
         }}
