@@ -53,8 +53,6 @@ export default function Slug({ post, base64 }) {
       window.open(`mailto:?subject=${post.title}&body=https://kreatouteure.fr/articles/${post.slug}`, '_blank');
     }    
   };
-
-
   return (
     <>
       <Head>
@@ -105,12 +103,10 @@ export default function Slug({ post, base64 }) {
           <p>{post.contents}</p>
           <h2>{post.subtitle}</h2>
           <p>{post.contents2}</p>
-          <div className={styles.posts__contents__social}>
-            <p>Partager sur &#xe1001; :</p>
-            
-            <select onChange={(e)=> handleChangeShareSocial(e)}>
-              <option value="---">---</option>
-              <option value="facebook">Facebook</option>
+          <div className={styles.posts__contents__social}>            
+            <select onChange={(e)=> handleChangeShareSocial(e)} className="select">
+              <option value="---">Partager sur ...</option>
+              <option value="facebook" data-icon="icon-facebook">Facebook</option>
               <option value="twitter">Twitter</option>
               <option value="linkedin">Linkedin</option>
               <option value="pinterest">Pinterest</option>
