@@ -12,6 +12,18 @@
             cursor: pointer;
         }
     }
+    &__contents{
+        &__social{
+            width: $width-general;
+            overflow: auto;
+            margin: 0 auto;
+            & select{
+            text-align: center;
+            background: $color-blue !important;
+            opacity: 0.8;
+            }
+        }}
+
 }
 
 //* Media Queries
@@ -21,6 +33,10 @@
         &__images{
             width: 500px;
         }
+        &__contents{
+            &__social{
+                width: 50%;
+            }}
     }
   }
   

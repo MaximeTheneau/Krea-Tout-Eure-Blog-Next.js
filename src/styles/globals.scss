@@ -92,7 +92,9 @@ select{
   width: 100%;
   border: 0.5px solid $font-color;
   font-size: $font-size;
+  font-family: $font-primary;
   border-radius: $border-radius;
+  color: $font-color;
   background: none;
   padding: 0.5rem;
   &:focus{
