@@ -38,6 +38,23 @@ export default function Slug({ post, base64 }) {
     ? `Articles de blog ${post.title}`
     : post.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
 
+  const handleChangeShareSocial = (e) => {
+    const social = e.target.value;
+    console.log(social);
+    if (social === 'facebook') {
+      window.open(`https://www.facebook.com/sharer/sharer.php?u=https://krea-tout-eure.fr/articles/${post.slug}`, '_blank');
+    } else if (social === 'twitter') {
+      window.open(`https://twitter.com/intent/tweet?url=https://kreatouteure.fr/articles/${post.slug}`, '_blank');
+    } else if (social === 'linkedin') {
+      window.open(`https://www.linkedin.com/sharing/share-offsite/?url=https://kreatouteure.fr/articles/${post.slug}`, '_blank');
+    } else if (social === 'pinterest') {
+      window.open(`https://pinterest.com/pin/create/button/?url=https://kreatouteure.fr/articles/${post.slug}`, '_blank');
+    } else if (social === 'email') {
+      window.open(`mailto:?subject=${post.title}&body=https://kreatouteure.fr/articles/${post.slug}`, '_blank');
+    }    
+  };
+
+
   return (
     <>
       <Head>
@@ -49,7 +66,6 @@ export default function Slug({ post, base64 }) {
         <meta property="og:description" content={descriptionMeta} />
         <meta property="og:site_name" content="https://kreatouteure.fr" />
         <meta property="og:image" content={post.imgPost.path} />
-        <meta charset="utf-8" />s
         <script type="application/ld+json">
           {`{
             "@context":"https://schema.org/",
@@ -90,12 +106,15 @@ export default function Slug({ post, base64 }) {
           <h2>{post.subtitle}</h2>
           <p>{post.contents2}</p>
           <div className={styles.posts__contents__social}>
-            <p>Partager sur  &#xe1111;:</p>
+            <p>Partager sur &#xe1001; :</p>
             
-            <select onChange={(e)=>console.log(e.target.value)}>
+            <select onChange={(e)=> handleChangeShareSocial(e)}>
               <option value="---">---</option>
-              <option value="instagram" className='iconTheneauM'>&#xe906; Instagram</option>
-              <option value="facebook">&#x Facebook</option>
+              <option value="facebook">Facebook</option>
+              <option value="twitter">Twitter</option>
+              <option value="linkedin">Linkedin</option>
+              <option value="pinterest">Pinterest</option>
+              <option value="email">Email</option>
             </select>
           </div>
         </div>
