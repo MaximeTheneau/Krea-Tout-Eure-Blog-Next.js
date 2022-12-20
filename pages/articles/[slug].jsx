@@ -89,6 +89,15 @@ export default function Slug({ post, base64 }) {
           <p>{post.contents}</p>
           <h2>{post.subtitle}</h2>
           <p>{post.contents2}</p>
+          <div className={styles.posts__contents__social}>
+            <p>Partager sur :</p>
+            
+            <select onChange={(e)=>console.log(e.target.value)}>
+              <option value="---">---</option>
+              <option value="instagram" className='iconTheneauM'>{`\e906 Instagram`}</option>
+              <option value="facebook">&#x Facebook</option>
+            </select>
+          </div>
         </div>
       </div>
     </>
