@@ -4,6 +4,7 @@ import Head from 'next/head';
 import PropTypes from 'prop-types';
 import Thumbnail from '../src/components/thumbnail';
 import styles from '../src/styles/Home.module.scss';
+import TricotSvg from '../src/components/tricotSvg';
 
 export async function getStaticProps() {
   const resPost = await fetch('http://localhost:8000/api/posts/thumbnail');
@@ -19,6 +20,7 @@ export default function Index({ thumbnail, pageHome }) {
   const descriptionMeta = pageHome.contents === null
     ? `Articles de blog ${pageHome.title}`
     : `${pageHome.contents.substring(0, 155).replace(/[\r\n]+/gm, '')}...`;
+
   return (
     <>
       <Head>
@@ -28,7 +30,7 @@ export default function Index({ thumbnail, pageHome }) {
         <meta property="og:type" content="website" />
         <meta property="og:title" content={pageHome.subtitle} />
         <meta property="og:description" content={descriptionMeta} />
-        <meta property="og:site_name" content="https://kreatouteure.fr" />
+        <meta property="og:site_name" content="https://krea-tout-eure.fr" />
         <meta property="og:image" content={pageHome.imgHeader.path} />
       </Head>
 
@@ -56,6 +58,7 @@ export default function Index({ thumbnail, pageHome }) {
         </div>
       </header>
       <div className={styles.home__cards}>
+        <TricotSvg />
         {
           thumbnail.map((post) => (
             <Thumbnail
