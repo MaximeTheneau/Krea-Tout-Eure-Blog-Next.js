@@ -8,17 +8,6 @@
     background: #fff;
     z-index: 1;
   }
-  &__defensive {
-    border-radius: $border-radius;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 250px;
-    height: 250px;
-    background: $color-primary-gradient;
-    opacity: 0.7;
-    z-index: -1;
-  }
   &__img{
     width: 250px;
     height: 250px;

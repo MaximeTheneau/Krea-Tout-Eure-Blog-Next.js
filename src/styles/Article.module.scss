@@ -9,11 +9,16 @@
         display: flex;
         flex-wrap: wrap;
         margin: 0 auto;
-        width: $width-general;
+        justify-content: center;
+
+        &__thumbnail{
+            position: relative;
+            width: 250px;
+            margin: 0.5rem;
+        }
         &__img{
-            border-radius: 0.7rem;
-            padding: $paddin-card;
             cursor: pointer;
+            border-radius: 0.7rem;
         }
     }
     &__contents{
@@ -35,7 +40,7 @@
 @media screen and (min-width: 720px) {
     .posts{
         &__images{
-            width: 500px;
+            width: 532px;
         }
         &__contents{
             &__social{

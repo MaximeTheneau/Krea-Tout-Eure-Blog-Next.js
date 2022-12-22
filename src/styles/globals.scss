@@ -145,7 +145,16 @@ hr{
 .relative{
   position: relative;
 }
-.background{
+.defensive {
+  border-radius: 0.7rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 250px;
+  background: $color-primary-gradient;
+  opacity: 0.7;
+  z-index: -1;
 }
 //* Media Queries
 

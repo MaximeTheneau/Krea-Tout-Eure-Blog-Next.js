@@ -5,22 +5,25 @@ import PropTypes from 'prop-types';
 import Thumbnail from '../src/components/thumbnail';
 import styles from '../src/styles/Home.module.scss';
 import TricotSvg from '../src/components/tricotSvg';
+import useSWR from 'swr'
+
+const fetcher = (url) => fetch(url).then((res) => res.json());
+
 
 export async function getStaticProps() {
-  const resPost = await fetch('http://localhost:8000/api/posts/thumbnail');
-  const thumbnail = await resPost.json();
-
-  const res = await fetch('http://localhost:8000/api/pages/Accueil');
-  const pageHome = await res.json();
-
-  return { props: { pageHome, thumbnail } };
+    const res = await fetch('http://localhost:8000/api/pages/Accueil');
+    const pageHome = await res.json();
+    return { props: {  pageHome } };
 }
 
-export default function Index({ thumbnail, pageHome }) {
+export default function Index({  pageHome }) {
   const descriptionMeta = pageHome.contents === null
     ? `Articles de blog ${pageHome.title}`
     : `${pageHome.contents.substring(0, 155).replace(/[\r\n]+/gm, '')}...`;
-
+    const { data, error } = useSWR('http://localhost:8000/api/posts/thumbnail', fetcher);
+    if (error) return <div>failed to load</div>
+    if (!data) return <div>loading...</div>
+    console.log(data);
   return (
     <>
       <Head>
@@ -37,13 +40,14 @@ export default function Index({ thumbnail, pageHome }) {
       <header className={styles.home__header}>
         <div className={`card ${styles.home__header__card}`}>
           <div className={styles.home__header__card__img}>
+            
             <Image
               src={pageHome.imgHeader.path}
               alt={`logo ${pageHome.subtitle}`}
               width={500}
               height={500}
               style={{ width: 'auto', height: 'auto' }}
-              priority
+              lazy
             />
           </div>
           <div className={styles.home__header__card__contents}>
@@ -58,9 +62,8 @@ export default function Index({ thumbnail, pageHome }) {
         </div>
       </header>
       <div className={styles.home__cards}>
-        <TricotSvg />
         {
-          thumbnail.map((post) => (
+          data.map((post) => (
             <Thumbnail
               key={post.id}
               imgThumbnail={post.imgThumbnail}
