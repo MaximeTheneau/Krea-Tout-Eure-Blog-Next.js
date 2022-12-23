@@ -6,24 +6,30 @@ import Thumbnail from '../src/components/thumbnail';
 import styles from '../src/styles/Home.module.scss';
 import TricotSvg from '../src/components/tricotSvg';
 import useSWR from 'swr'
+import fetcher from '../libs/fetcher'
 
-const fetcher = (url) => fetch(url).then((res) => res.json());
+const urlThumbnail = 'http://localhost:8000/api/posts/thumbnail';
 
-
-export async function getStaticProps() {
+export async function getStaticProps () {
     const res = await fetch('http://localhost:8000/api/pages/Accueil');
     const pageHome = await res.json();
     return { props: {  pageHome } };
 }
 
-export default function Index({  pageHome }) {
+export async function getServersideProps() {
+  const data = await fetcher(urlThumbnail);
+  return { props: { thumbnail: data } };
+}
+
+export default function Index({  pageHome, thumbnail }) {
+
+  const dataThumbnail = useSWR(urlThumbnail, fetcher, { thumbnail }).data;
+  
   const descriptionMeta = pageHome.contents === null
-    ? `Articles de blog ${pageHome.title}`
-    : `${pageHome.contents.substring(0, 155).replace(/[\r\n]+/gm, '')}...`;
-    const { data, error } = useSWR('http://localhost:8000/api/posts/thumbnail', fetcher);
-    if (error) return <div>failed to load</div>
-    if (!data) return <div>loading...</div>
-    console.log(data);
+  ? `Articles de blog ${pageHome.title}`
+  : `${pageHome.contents.substring(0, 155).replace(/[\r\n]+/gm, '')}...`;
+
+
   return (
     <>
       <Head>
@@ -63,7 +69,8 @@ export default function Index({  pageHome }) {
       </header>
       <div className={styles.home__cards}>
         {
-          data.map((post) => (
+          dataThumbnail !== undefined
+          ? dataThumbnail.map((post) => (
             <Thumbnail
               key={post.id}
               imgThumbnail={post.imgThumbnail}
@@ -71,6 +78,7 @@ export default function Index({  pageHome }) {
               slug={post.slug}
             />
           ))
+          : <TricotSvg />
         }
       </div>
     </>
