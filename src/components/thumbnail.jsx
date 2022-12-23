@@ -24,7 +24,7 @@ export default function thumbnail({
               alt={title}
               width="250"
               height="250"
-              loading="lazy"
+              lazy="true"
             />
           </div>
           <div className={styles.thumbnail__contents}>
