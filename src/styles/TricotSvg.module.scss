@@ -1,0 +1,18 @@
+@import './variables.scss';
+
+.tricotSvg  {
+    fill: none;
+    stroke: #000;
+    stroke-width: 3px;
+    stroke-dasharray: 1060;
+    stroke-dashoffset: 1060;
+    animation: offset 5s linear forwards;
+  }
+  
+  @keyframes offset {
+    100% {
+      stroke-dashoffset: 0;
+      fill: #000;
+      stroke: #000;
+    }
+  }

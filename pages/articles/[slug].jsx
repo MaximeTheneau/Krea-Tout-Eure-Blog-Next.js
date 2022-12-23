@@ -2,6 +2,7 @@ import Head from 'next/head';
 import { string } from 'prop-types';
 import ImagePost from '../../src/components/imagePost';
 import styles from '../../src/styles/Article.module.scss';
+import TricotSvg from '../../src/components/tricotSvg';
 
 export async function getStaticPaths() {
   if (process.env.SKIP_BUILD_STATIC_GENERATION) {
@@ -33,7 +34,9 @@ export async function getStaticProps({ params }) {
   return { props: { post, base64 } };
 }
 
+
 export default function Slug({ post, base64 }) {
+
   const descriptionMeta = post.contents === null
     ? `Articles de blog ${post.title}`
     : post.contents.substring(0, 155).replace(/[\r\n]+/gm, '');

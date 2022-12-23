@@ -2,6 +2,7 @@ import { useState } from 'react';
 import PropTypes from 'prop-types';
 import Image from 'next/image';
 import ImageModal from './modal/Image';
+import TricotSvg from './tricotSvg';
 
 import styles from '../styles/Article.module.scss';
 
@@ -33,20 +34,25 @@ export default function ImagePost({
         />
       ) : ''}
       {arrayImg.map((img) => img && (
-        <Image
-          key={img.path}
-          src={img.path}
-          width={img.width}
-          height={img.height}
-          alt={title}
-          style={{
-            width: '250px', height: '250px', objectFit: 'cover', maxWidth: '100%', maxHeight: '100%',
-          }}
-          placeholder="blur"
-          blurDataURL={`data:image/jpeg;base64,/${base64}`}
-          className={styles.posts__images__img}
-          onClick={() => onClickModal(img, title)}
-        />
+        <div className={styles.posts__images__thumbnail}>
+          <div className="defensive" >
+            <TricotSvg />
+          </div>
+          <Image
+            key={img.path}
+            src={img.path}
+            width={img.width}
+            height={img.height}
+            alt={title}
+            style={{
+              width: '250px', height: '250px', objectFit: 'cover', maxWidth: '100%', maxHeight: '100%',
+            }}
+            placeholder="blur"
+            blurDataURL={`data:image/jpeg;base64,/${base64}`}
+            className={styles.posts__images__img}
+            onClick={() => onClickModal(img, title)}
+          />
+        </div>
       ))}
     </>
   );

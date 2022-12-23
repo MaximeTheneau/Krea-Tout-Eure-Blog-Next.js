@@ -4,21 +4,32 @@ import Head from 'next/head';
 import PropTypes from 'prop-types';
 import Thumbnail from '../src/components/thumbnail';
 import styles from '../src/styles/Home.module.scss';
+import TricotSvg from '../src/components/tricotSvg';
+import useSWR from 'swr'
+import fetcher from '../libs/fetcher'
 
-export async function getStaticProps() {
-  const resPost = await fetch('http://localhost:8000/api/posts/thumbnail');
-  const thumbnail = await resPost.json();
+const urlThumbnail = 'http://localhost:8000/api/posts/thumbnail';
 
-  const res = await fetch('http://localhost:8000/api/pages/Accueil');
-  const pageHome = await res.json();
-
-  return { props: { pageHome, thumbnail } };
+export async function getStaticProps () {
+    const res = await fetch('http://localhost:8000/api/pages/Accueil');
+    const pageHome = await res.json();
+    return { props: {  pageHome } };
 }
 
-export default function Index({ thumbnail, pageHome }) {
+export async function getServersideProps() {
+  const data = await fetcher(urlThumbnail);
+  return { props: { thumbnail: data } };
+}
+
+export default function Index({  pageHome, thumbnail }) {
+
+  const dataThumbnail = useSWR(urlThumbnail, fetcher, { thumbnail }).data;
+  
   const descriptionMeta = pageHome.contents === null
-    ? `Articles de blog ${pageHome.title}`
-    : `${pageHome.contents.substring(0, 155).replace(/[\r\n]+/gm, '')}...`;
+  ? `Articles de blog ${pageHome.title}`
+  : `${pageHome.contents.substring(0, 155).replace(/[\r\n]+/gm, '')}...`;
+
+
   return (
     <>
       <Head>
@@ -28,20 +39,21 @@ export default function Index({ thumbnail, pageHome }) {
         <meta property="og:type" content="website" />
         <meta property="og:title" content={pageHome.subtitle} />
         <meta property="og:description" content={descriptionMeta} />
-        <meta property="og:site_name" content="https://kreatouteure.fr" />
+        <meta property="og:site_name" content="https://krea-tout-eure.fr" />
         <meta property="og:image" content={pageHome.imgHeader.path} />
       </Head>
 
       <header className={styles.home__header}>
         <div className={`card ${styles.home__header__card}`}>
           <div className={styles.home__header__card__img}>
+            
             <Image
               src={pageHome.imgHeader.path}
               alt={`logo ${pageHome.subtitle}`}
               width={500}
               height={500}
               style={{ width: 'auto', height: 'auto' }}
-              priority
+              lazy
             />
           </div>
           <div className={styles.home__header__card__contents}>
@@ -57,7 +69,8 @@ export default function Index({ thumbnail, pageHome }) {
       </header>
       <div className={styles.home__cards}>
         {
-          thumbnail.map((post) => (
+          dataThumbnail !== undefined
+          ? dataThumbnail.map((post) => (
             <Thumbnail
               key={post.id}
               imgThumbnail={post.imgThumbnail}
@@ -65,6 +78,7 @@ export default function Index({ thumbnail, pageHome }) {
               slug={post.slug}
             />
           ))
+          : <TricotSvg />
         }
       </div>
     </>
