@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 import Thumbnail from '../src/components/thumbnail';
 import styles from '../src/styles/Home.module.scss';
 import TricotSvg from '../src/components/tricotSvg';
-import useSWR from 'swr'
-import fetcher from '../libs/fetcher'
+import useSWR from 'swr';
+import fetcher from '../src/libs/fetcher';
 
 const urlThumbnail = 'http://localhost:8000/api/posts/thumbnail';
 
@@ -46,14 +46,13 @@ export default function Index({  pageHome, thumbnail }) {
       <header className={styles.home__header}>
         <div className={`card ${styles.home__header__card}`}>
           <div className={styles.home__header__card__img}>
-            
             <Image
               src={pageHome.imgHeader.path}
               alt={`logo ${pageHome.subtitle}`}
               width={500}
               height={500}
               style={{ width: 'auto', height: 'auto' }}
-              lazy
+              priority
             />
           </div>
           <div className={styles.home__header__card__contents}>
@@ -90,7 +89,7 @@ Index.propTypes = {
     title: PropTypes.string.isRequired,
     slug: PropTypes.string.isRequired,
     imgThumbnail: PropTypes.string.isRequired,
-  })).isRequired,
+  })),
   pageHome: PropTypes.shape({
     title: PropTypes.string.isRequired,
     subtitle: PropTypes.string.isRequired,
