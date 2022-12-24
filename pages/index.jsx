@@ -7,6 +7,7 @@ import styles from '../src/styles/Home.module.scss';
 import TricotSvg from '../src/components/tricotSvg';
 import useSWR from 'swr';
 import fetcher from '../src/libs/fetcher';
+import handleMouseCard from '../src/libs/handleMouseCard';
 
 const urlThumbnail = 'http://localhost:8000/api/posts/thumbnail';
 
@@ -60,8 +61,14 @@ export default function Index({  pageHome, thumbnail }) {
           </div>
           <div className={styles.home__header__card__contents2}>
             <p>{pageHome.contents}</p>
-            <Link href="/qui-sommes-nous">
-              <button type="button" className="button-glass">En savoir plus</button>
+            <Link
+              href="/qui-sommes-nous"
+            >
+              <button type="button"
+                onMouseMove={handleMouseCard}
+                onMouseLeave={handleMouseCard}
+                onMouseEnter={handleMouseCard}
+                className="button-glass">En savoir plus</button>
             </Link>
           </div>
         </div>

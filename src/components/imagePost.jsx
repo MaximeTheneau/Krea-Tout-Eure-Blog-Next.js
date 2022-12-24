@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import Image from 'next/image';
 import ImageModal from './modal/Image';
 import TricotSvg from './tricotSvg';
+import handleMouseCard from '../libs/handleMouseCard';
 
 import styles from '../styles/Article.module.scss';
 
@@ -34,7 +35,7 @@ export default function ImagePost({
         />
       ) : ''}
       {arrayImg.map((img) => img && (
-        <div className={styles.posts__images__thumbnail}>
+        <div className={styles.posts__images__thumbnail} >
           <div className="defensive" >
             <TricotSvg />
           </div>
