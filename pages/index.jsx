@@ -44,8 +44,8 @@ export default function Index({  pageHome, thumbnail }) {
         <meta property="og:image" content={pageHome.imgHeader.path} />
       </Head>
 
-      <header className={styles.home__header}>
-        <div className={`card ${styles.home__header__card}`}>
+      <header className={`card ${styles.home__header}`}>
+        <div className={styles.home__header__card}>
           <div className={styles.home__header__card__img}>
             <Image
               src={pageHome.imgHeader.path}
@@ -58,18 +58,14 @@ export default function Index({  pageHome, thumbnail }) {
           </div>
           <div className={styles.home__header__card__contents}>
             <h1>{pageHome.subtitle}</h1>
-          </div>
-          <div className={styles.home__header__card__contents2}>
+            <div className={styles.home__header__card__contents2}>
             <p>{pageHome.contents}</p>
             <Link
               href="/qui-sommes-nous"
             >
-              <button type="button"
-                onMouseMove={handleMouseCard}
-                onMouseLeave={handleMouseCard}
-                onMouseEnter={handleMouseCard}
-                className="button-glass">En savoir plus</button>
+              <button type="button" className="button-glass">En savoir plus</button>
             </Link>
+          </div>
           </div>
         </div>
       </header>

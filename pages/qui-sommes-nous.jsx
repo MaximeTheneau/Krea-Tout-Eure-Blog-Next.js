@@ -15,7 +15,7 @@ export default function QuiSommesNous({ pageAbout }) {
     : `${pageAbout.contents.substring(0, 155).replace(/[\r\n]+/gm, '')}...`;
 
   return (
-    <div>
+    <div className={styles.pages}>
       <Head>
         <title>{pageAbout.title}</title>
         <meta name="description" content={descriptionMeta} />
@@ -26,21 +26,20 @@ export default function QuiSommesNous({ pageAbout }) {
         <meta property="og:site_name" content="https://kreatouteure.fr" />
         <meta property="og:image" content={pageAbout.imgHeader.path} />
       </Head>
-      <header>
-        {/* <Image
+      <header className='card'>
+        <h1>{pageAbout.title}</h1>
+        <Image
           src={pageAbout.imgHeader.path}
           alt={pageAbout.title}
           width={pageAbout.imgHeader.width}
           height={pageAbout.imgHeader.height}
           style={{ width: 'auto', height: 'auto' }}
           priority
-        /> */}
-        <h1>{pageAbout.title}</h1>
+          />
       </header>
-      <main>
-        <div className={`card ${styles.pages}`}>
+      <main className='card'>
+        <h2>{pageAbout.subtitle}</h2>
           <p>{pageAbout.contents}</p>
-        </div>
       </main>
     </div>
   );
