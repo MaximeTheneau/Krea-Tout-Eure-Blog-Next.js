@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import styleModal from '../../styles/Modal.module.scss';
 
-
 export default function confirmation({ onClickConfirmation }) {
   setTimeout(() => {
     onClickConfirmation();

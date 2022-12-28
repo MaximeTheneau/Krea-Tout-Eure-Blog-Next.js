@@ -102,7 +102,6 @@ export default function Cookies({ setCookiesModal }) {
           </div>
         </>
       )}
-
     </div>
   );
 }

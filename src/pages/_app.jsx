@@ -1,8 +1,8 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import Layout from '../src/components/layout';
-import '../src/styles/globals.scss';
-import Cookies from '../src/components/modal/Cookies';
+import Layout from '../components/layout';
+import '../styles/globals.scss';
+import Cookies from '../components/modal/Cookies';
 
 export default function MyApp({ Component, pageProps }) {
   const [cookiesModal, setCookiesModal] = useState(false);
@@ -32,9 +32,12 @@ export default function MyApp({ Component, pageProps }) {
   return (
     <>
       {cookiesModal ? <Cookies setCookiesModal={setCookiesModal} /> : ''}
-      <div className="background" style={{
-        background: `url(${background}) repeat fixed`,
-      }}>
+      <div
+        className="background"
+        style={{
+          background: `url(${background}) repeat fixed`,
+        }}
+      >
         <Layout {...pageProps}>
           <Component {...pageProps} />
         </Layout>

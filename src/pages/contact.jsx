@@ -2,8 +2,8 @@ import Image from 'next/image';
 import Head from 'next/head';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import styles from '../src/styles/Contact.module.scss';
-import Confirmation from '../src/components/modal/Confirmation';
+import styles from './styles/Contact.module.scss';
+import Confirmation from '../components/modal/Confirmation';
 
 export async function getStaticProps() {
   const res = await fetch('http://localhost:8000/api/pages/Contactez-nous');
@@ -116,7 +116,7 @@ export default function Contact({ pageContact }) {
   }
 
   return (
-    <div>
+    <>
       <Head>
         <title>{pageContact.title}</title>
         <meta name="description" content={descriptionMeta} />
@@ -134,17 +134,19 @@ export default function Contact({ pageContact }) {
           <Confirmation onClickConfirmation={onClickConfirmation} />
         </>
       ) : ''}
-      <header>
-        {/* <Image
+      <header className='card'>
+        <Image
           src={pageContact.imgHeader.path}
           alt={pageContact.title}
           width={pageContact.imgHeader.width}
           height={pageContact.imgHeader.height}
           style={{ width: 'auto', height: 'auto' }}
           priority
-        /> */}
-        <h1>{pageContact.title}</h1>
-        <p>{pageContact.contents}</p>
+        />
+        <div className='contents'>
+          <h1>{pageContact.title}</h1>
+          <p>{pageContact.contents}</p>
+        </div>
       </header>
       <main>
         <div className={styles.contact}>
@@ -179,9 +181,9 @@ export default function Contact({ pageContact }) {
             <h2>Formulaire de contact</h2>
             <form onSubmit={handleSubmit}>
               <div className="input">
-                <span>
+                <h3>
                   Contactez Kréa Tout Eure ou le webmaster ?
-                </span>
+                </h3>
                 <select
                   onChange={(e) => setState({
                     ...state,
@@ -194,10 +196,7 @@ export default function Contact({ pageContact }) {
                 </select>
               </div>
               <div className={styles.contact__form__input}>
-                <span>
-                  Votre Nom
-                  {classErrorOrConfirmation(state.confirmationName)}
-                </span>
+                {classErrorOrConfirmation(state.confirmationName)}
                 <input
                   type="text"
                   name="name"
@@ -205,15 +204,17 @@ export default function Contact({ pageContact }) {
                   onChange={(e) => setState(
                     { ...state, form: { ...state.form, name: e.target.value } },
                   )}
+                  onBlur={(e) => (
+                    e.target.value.length > 2 && e.target.value.length < 35
+                      ? setState({ ...state, confirmationName: true })
+                      : setState({ ...state, confirmationName: false })
+                  )}
                   placeholder="Nom Prénom"
                   required
                 />
               </div>
               <div className={styles.contact__form__input}>
-                <span>
-                  Votre email
-                  {classErrorOrConfirmation(state.confirmationEmail)}
-                </span>
+                {classErrorOrConfirmation(state.confirmationEmail)}
                 <input
                   type="email"
                   name="email"
@@ -234,10 +235,7 @@ export default function Contact({ pageContact }) {
                 />
               </div>
               <div className={styles.contact__form__textarea}>
-                <span>
-                  Message
-                  {classErrorOrConfirmation(state.confirmationMessage)}
-                </span>
+                {classErrorOrConfirmation(state.confirmationMessage)}
                 <textarea
                   rows={state.textArea}
                   value={state.form.message}
@@ -259,7 +257,7 @@ export default function Contact({ pageContact }) {
           </div>
         </div>
       </main>
-    </div>
+    </>
   );
 }
 

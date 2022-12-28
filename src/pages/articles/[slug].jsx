@@ -1,8 +1,7 @@
+import PropTypes from 'prop-types';
 import Head from 'next/head';
-import { string } from 'prop-types';
-import ImagePost from '../../src/components/imagePost';
-import styles from '../../src/styles/Article.module.scss';
-import TricotSvg from '../../src/components/tricotSvg';
+import ImagePost from '../../components/imagePost';
+import styles from '../../styles/Article.module.scss';
 
 export async function getStaticPaths() {
   if (process.env.SKIP_BUILD_STATIC_GENERATION) {
@@ -12,15 +11,10 @@ export async function getStaticPaths() {
     };
   }
 
-  // Call an external API endpoint to get posts
   const res = await fetch('http://localhost:8000/api/posts');
   const posts = await res.json();
 
-  // Get the paths we want to prerender based on posts
-  // In production environments, prerender all pages
-  // (slower builds, but faster initial page load)
   const paths = posts.map((post) => ({ params: { slug: post.slug } }));
-  // { fallback: false } means other routes should 404
   return { paths, fallback: false };
 }
 
@@ -28,22 +22,16 @@ export async function getStaticProps({ params }) {
   const res = await fetch(`http://localhost:8000/api/posts/${params.slug}`);
   const post = await res.json();
 
-  const resBase64 = await fetch('http://localhost:8000/api/placeholder');
-  const base64 = await resBase64.json();
-  // Pass post data to the page via props
-  return { props: { post, base64 } };
+  return { props: { post } };
 }
 
-
-export default function Slug({ post, base64 }) {
-
+export default function Slug({ post }) {
   const descriptionMeta = post.contents === null
     ? `Articles de blog ${post.title}`
     : post.contents.substring(0, 155).replace(/[\r\n]+/gm, '');
 
   const handleChangeShareSocial = (e) => {
     const social = e.target.value;
-    console.log(social);
     if (social === 'facebook') {
       window.open(`https://www.facebook.com/sharer/sharer.php?u=https://krea-tout-eure.fr/articles/${post.slug}`, '_blank');
     } else if (social === 'twitter') {
@@ -54,7 +42,7 @@ export default function Slug({ post, base64 }) {
       window.open(`https://pinterest.com/pin/create/button/?url=https://krea-tout-eure.fr/articles/${post.slug}`, '_blank');
     } else if (social === 'email') {
       window.open(`mailto:?subject=${post.title}&body=https://krea-tout-eure.fr/articles/${post.slug}`, '_blank');
-    }    
+    }
   };
   return (
     <>
@@ -95,29 +83,53 @@ export default function Slug({ post, base64 }) {
         </script>
       </Head>
 
-      <header>
-        <h1>{post.title}</h1>
-      </header>
-      <div className={styles.posts}>
-        <div className={styles.posts__images}>
-          <ImagePost {...post} {...base64} />
-        </div>
-        <div className={styles.posts__contents}>
-          <p>{post.contents}</p>
-          <h2>{post.subtitle}</h2>
-          <p>{post.contents2}</p>
-          <div className={styles.posts__contents__social}>            
-            <select onChange={(e)=> handleChangeShareSocial(e)} className="select">
-              <option value="---">Partager sur ...</option>
-              <option value="facebook" data-icon="icon-facebook">Facebook</option>
-              <option value="twitter">Twitter</option>
-              <option value="linkedin">Linkedin</option>
-              <option value="pinterest">Pinterest</option>
-              <option value="email">Email</option>
-            </select>
+      <main className={`card ${styles.posts}`}>
+        <div>
+          <h1>{post.title}</h1>
+          <div className={styles.posts__images}>
+            <ImagePost {...post} {...base64} />
+          </div>
+          <div className={styles.posts__contents}>
+            <p>{post.contents}</p>
+            <h2>{post.subtitle}</h2>
+            <p>{post.contents2}</p>
           </div>
         </div>
-      </div>
+        <div className={styles.posts__contents__social}>
+          <select onChange={(e) => handleChangeShareSocial(e)} className="select">
+            <option value="---">Partager sur ...</option>
+            <option value="facebook" data-icon="icon-facebook">Facebook</option>
+            <option value="twitter">Twitter</option>
+            <option value="linkedin">Linkedin</option>
+            <option value="pinterest">Pinterest</option>
+            <option value="email">Email</option>
+          </select>
+        </div>
+      </main>
     </>
   );
 }
+
+Slug.propTypes = {
+  post: PropTypes.shape({
+    title: PropTypes.string.isRequired,
+    subtitle: PropTypes.string.isRequired,
+    contents: PropTypes.string.isRequired,
+    contents2: PropTypes.string.isRequired,
+    slug: PropTypes.string.isRequired,
+    updatedAt: PropTypes.string.isRequired,
+    createdAt: PropTypes.string.isRequired,
+    imgPost: PropTypes.shape({
+      path: PropTypes.string.isRequired,
+    }),
+    imgPost2: PropTypes.shape({
+      path: PropTypes.string,
+    }),
+    imgPost3: PropTypes.shape({
+      path: PropTypes.string,
+    }),
+    imgPost4: PropTypes.shape({
+      path: PropTypes.string,
+    }),
+  }).isRequired,
+};

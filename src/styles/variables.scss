@@ -7,7 +7,7 @@ $color-white: #fff;
 $color-white-opacity: rgba(255, 255, 255, 0.541);
 
 $color-blue: #20d2ff;
-$color-grey: linear-gradient(to right top, #7d8c91, #748d97, #7a949e, #7f9aa5, #85a1ac);
+$color-grey: rgb(126, 126, 126);
 $color-red: #e22121;
 $color-green: #21e2a1;
 $color-glass: rgba(255,255,255,0.1);
@@ -19,8 +19,8 @@ $font-color-opacity: #0b0c0e3d;
 
 $font-primary: 'fontGeneral', sans-serif;
 $font-secondary: 'fontTitle', sans-serif;
-$font-size: 1.5rem;
-$font-size-small: 1.2rem;
+$font-size: 1rem;
+$font-size-small: 0.8rem;
 $font-size-large: 1.8rem;
 $font-size-bold: 900;
 
