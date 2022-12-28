@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import PropTypes from 'prop-types';
 import Image from 'next/image';
-import styles from '../src/styles/Pages.module.scss';
+import styles from '../styles/Pages.module.scss';
 
 export async function getStaticProps() {
   const res = await fetch('http://localhost:8000/api/pages/qui-sommes-nous');
@@ -15,7 +15,7 @@ export default function QuiSommesNous({ pageAbout }) {
     : `${pageAbout.contents.substring(0, 155).replace(/[\r\n]+/gm, '')}...`;
 
   return (
-    <div className={styles.pages}>
+    <>
       <Head>
         <title>{pageAbout.title}</title>
         <meta name="description" content={descriptionMeta} />
@@ -26,7 +26,7 @@ export default function QuiSommesNous({ pageAbout }) {
         <meta property="og:site_name" content="https://kreatouteure.fr" />
         <meta property="og:image" content={pageAbout.imgHeader.path} />
       </Head>
-      <header className='card'>
+      <header className={`${styles.pages__header} card`}>
         <h1>{pageAbout.title}</h1>
         <Image
           src={pageAbout.imgHeader.path}
@@ -37,11 +37,11 @@ export default function QuiSommesNous({ pageAbout }) {
           priority
           />
       </header>
-      <main className='card'>
+      <main className={`${styles.pages__main} card`}>
         <h2>{pageAbout.subtitle}</h2>
-          <p>{pageAbout.contents}</p>
+        <p>{pageAbout.contents}</p>
       </main>
-    </div>
+    </>
   );
 }
 

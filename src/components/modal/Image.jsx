@@ -8,19 +8,19 @@ export default function ImageModal({
 }) {
   return (
     <div className={styleModal.modal__images}>
-        <Image
-          src={path}
-          alt={`image ${title} au format ${width}x${height}`}
-          width={width}
-          height={height}
-          sizes="100vw"
-          style={{
-            width: 'auto',
-            height: 'auto',
-          }}
-          className={styleModal.modal__images__relative__img}
-          onClick={onClickModal}
-        />
+      <Image
+        src={path}
+        alt={`image ${title} au format ${width}x${height}`}
+        width={width}
+        height={height}
+        sizes="100vw"
+        style={{
+          width: 'auto',
+          height: 'auto',
+        }}
+        className={styleModal.modal__images__relative__img}
+        onClick={onClickModal}
+      />
     </div>
   );
 }

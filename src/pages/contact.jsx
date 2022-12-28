@@ -2,8 +2,8 @@ import Image from 'next/image';
 import Head from 'next/head';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import styles from '../src/styles/Contact.module.scss';
-import Confirmation from '../src/components/modal/Confirmation';
+import styles from './styles/Contact.module.scss';
+import Confirmation from '../components/modal/Confirmation';
 
 export async function getStaticProps() {
   const res = await fetch('http://localhost:8000/api/pages/Contactez-nous');
@@ -116,7 +116,7 @@ export default function Contact({ pageContact }) {
   }
 
   return (
-    <div>
+    <>
       <Head>
         <title>{pageContact.title}</title>
         <meta name="description" content={descriptionMeta} />
@@ -196,7 +196,7 @@ export default function Contact({ pageContact }) {
                 </select>
               </div>
               <div className={styles.contact__form__input}>
-                  {classErrorOrConfirmation(state.confirmationName)}
+                {classErrorOrConfirmation(state.confirmationName)}
                 <input
                   type="text"
                   name="name"
@@ -257,7 +257,7 @@ export default function Contact({ pageContact }) {
           </div>
         </div>
       </main>
-    </div>
+    </>
   );
 }
 

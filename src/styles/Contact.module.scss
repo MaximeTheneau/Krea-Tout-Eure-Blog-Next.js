@@ -25,15 +25,11 @@
             display: flex;
             justify-content: space-around;
             align-items: center;
+            margin: 1rem 0;
             & i{
-                font-size: 3rem;
+                font-size: 2.3rem;
                 color: $color-krea;
                 cursor: pointer;
-                transition: all 0.3s ease;
-                &:hover{
-                    color: rgb(126, 126, 126);
-                    font-size: 3.2em;
-                }
             }
         }
         & i{
@@ -69,12 +65,13 @@
             overflow-y: hidden;
             
         }
+        & h3{
+            font-weight: bold;
+            font-size: 1rem;
+            margin: 1rem;
+        }
     }
-    & h3{
-        font-weight: bold;
-        font-size: 1.5rem;
-        margin: 1rem;
-    }
+
 }
 
 //* Media Queries
@@ -90,11 +87,25 @@
             flex-direction: column;
             width: 30%;
             margin: 0 auto;
+            &__social{
+                & i{
+                    font-size: 3rem;
+                    transition: all 0.3s ease;
+                    &:hover{
+                        color: rgb(126, 126, 126);
+                        font-size: 3.2em;
+                    }
+                }
+            }
         }
         &__form{
             width: 60%;
         }
+        & h3{
+            font-size: 1.5rem;
+        }
     }
+
 
 }
   

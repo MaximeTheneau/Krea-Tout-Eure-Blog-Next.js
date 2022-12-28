@@ -2,8 +2,7 @@
   "extends": ["next/core-web-vitals", "airbnb"],
   "rules": {
     // suppress errors for missing 'import React' in files
-   "react/react-in-jsx-scope": "off",
-   "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-   "react/no-unknown-property": [<enabled>, { ignore: <ignore> }]
+   "react/react-in-jsx-scope": "off"
+
   }
 }

@@ -1,13 +1,25 @@
 @import './variables.scss';
 
-.navbar{
+nav.navbar{
     position: fixed;
     z-index: 1;
     width: 100%;
     font-family: $font-primary;
-    text-align: left;
     padding:  0.5rem 2% 0.5rem 2%;
-    background-color: rgba(255, 255, 255, 0.856);
+    background-color: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.02);
+    color: $font-color;
+    transition: color 2s ease;
+    & a:hover{
+        transition: color 0.5s ease;  
+        color: $color-krea;
+    }
+}
+.navbar__720{
+    display: none;
+}
+.navbar__responsive{
+    text-align: left;
     & i{
         cursor: pointer;
         &:hover{
@@ -25,6 +37,16 @@
         align-items: flex-start;
         animation: fadeIn 1s ease;
         position: relative;
+        &-item{
+            &:hover{
+                color: $color-krea;
+            }
+            font-size: 1.5rem;
+            cursor: pointer;
+            &-social i{
+                margin: 0 0.5rem;
+            }
+        }
     }
 }
 //* Animation
@@ -41,3 +63,26 @@
         left: 0;
     }
   }
+
+//* Media Queries
+
+@media screen and (min-width: 720px) {
+    .navbar__responsive{
+        display: none;
+    }
+    .navbar__720{
+        display: block;
+        font-size: 1.5rem;
+        &__list{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            &-item{
+                margin: 0 0 0 1rem;
+                cursor: pointer;
+            }
+        }
+    }
+  }
+  
+  
