@@ -9,7 +9,7 @@ export default function MyApp({ Component, pageProps }) {
   const [background, setBackground] = useState('');
   useEffect(() => {
     async function getBacground() {
-      const response = await fetch('http://localhost:8000/api/placeholder');
+      const response = await fetch('https://back.krea-tout-eure.fr/api/placeholder');
       const data = await response.json();
       return setBackground(data[1].imgBase64);
     }

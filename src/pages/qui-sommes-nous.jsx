@@ -4,7 +4,7 @@ import Image from 'next/image';
 import styles from '../styles/Pages.module.scss';
 
 export async function getStaticProps() {
-  const res = await fetch('http://localhost:8000/api/pages/qui-sommes-nous');
+  const res = await fetch('https://back.krea-tout-eure.fr/api/pages/qui-sommes-nous');
   const pageAbout = await res.json();
   return { props: { pageAbout } };
 }
@@ -35,7 +35,7 @@ export default function QuiSommesNous({ pageAbout }) {
           height={pageAbout.imgHeader.height}
           style={{ width: 'auto', height: 'auto' }}
           priority
-          />
+        />
       </header>
       <main className={`${styles.pages__main} card`}>
         <h2>{pageAbout.subtitle}</h2>

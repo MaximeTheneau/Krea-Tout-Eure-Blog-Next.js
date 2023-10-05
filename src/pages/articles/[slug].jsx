@@ -11,7 +11,7 @@ export async function getStaticPaths() {
     };
   }
 
-  const res = await fetch('http://localhost:8000/api/posts');
+  const res = await fetch('https://back.krea-tout-eure.fr/api/posts');
   const posts = await res.json();
 
   const paths = posts.map((post) => ({ params: { slug: post.slug } }));
@@ -19,7 +19,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const res = await fetch(`http://localhost:8000/api/posts/${params.slug}`);
+  const res = await fetch(`https://back.krea-tout-eure.fr/api/posts/${params.slug}`);
   const post = await res.json();
 
   return { props: { post } };
@@ -87,7 +87,7 @@ export default function Slug({ post }) {
         <div>
           <h1>{post.title}</h1>
           <div className={styles.posts__images}>
-            <ImagePost {...post} {...base64} />
+            <ImagePost {...post} />
           </div>
           <div className={styles.posts__contents}>
             <p>{post.contents}</p>

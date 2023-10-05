@@ -23,16 +23,16 @@ export default function Navbar() {
               <span className={styles['navbar__720__list-item-link']}>Contact</span>
             </li>
           </Link>
-          <Link href="https://www.facebook.com/association.lespetitsfreresdespauvres" target="_blank" rel="noreferrer">
+          <Link href="https://www.facebook.com/people/Kreatouteure/100064816565302/" target="_blank" rel="noreferrer">
             <li className={styles['navbar__720__list-item']}>
               <i className="icon-facebook" />
             </li>
           </Link>
-          <Link href="https://www.instagram.com/lespetitsfreresdespauvres/" target="_blank" rel="noreferrer">
+          {/* <Link href="https://www.instagram.com/lespetitsfreresdespauvres/" target="_blank" rel="noreferrer">
             <li className={styles['navbar__720__list-item']}>
               <i className="icon-instagram" />
             </li>
-          </Link>
+          </Link> */}
         </ul>
       </nav>
       <nav

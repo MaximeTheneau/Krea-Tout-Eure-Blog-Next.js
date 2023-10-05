@@ -2,11 +2,11 @@ import Image from 'next/image';
 import Head from 'next/head';
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
-import styles from './styles/Contact.module.scss';
+import styles from '../styles/Contact.module.scss';
 import Confirmation from '../components/modal/Confirmation';
 
 export async function getStaticProps() {
-  const res = await fetch('http://localhost:8000/api/pages/Contactez-nous');
+  const res = await fetch('https://back.krea-tout-eure.fr/api/pages/Contactez-nous');
   const pageContact = await res.json();
   return { props: { pageContact } };
 }
@@ -42,7 +42,7 @@ export default function Contact({ pageContact }) {
       method: 'POST',
       body: JSON.stringify(state.form),
     };
-    fetch('http://localhost:8000/api/contact', requestOptions)
+    fetch('https://back.krea-tout-eure.fr/api/contact', requestOptions)
       .catch((error) => (
         console.log('error', error)
       ))
@@ -134,7 +134,7 @@ export default function Contact({ pageContact }) {
           <Confirmation onClickConfirmation={onClickConfirmation} />
         </>
       ) : ''}
-      <header className='card'>
+      <header className="card">
         <Image
           src={pageContact.imgHeader.path}
           alt={pageContact.title}
@@ -143,7 +143,7 @@ export default function Contact({ pageContact }) {
           style={{ width: 'auto', height: 'auto' }}
           priority
         />
-        <div className='contents'>
+        <div className="contents">
           <h1>{pageContact.title}</h1>
           <p>{pageContact.contents}</p>
         </div>
@@ -159,9 +159,9 @@ export default function Contact({ pageContact }) {
               <a href="https://www.facebook.com/people/Kreatouteure/100064816565302/" target="blank" rel="noreferrer">
                 <i className="icon-facebook" />
               </a>
-              <a href="http://localhost" target="_blank" rel="noreferrer">
+              {/* <a href="http://localhost" target="_blank" rel="noreferrer">
                 <i className="icon-instagram" />
-              </a>
+              </a> */}
             </div>
             <h3>
               <i className="icon-location" />

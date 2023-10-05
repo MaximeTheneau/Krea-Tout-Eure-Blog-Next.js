@@ -8,10 +8,10 @@ import styles from '../styles/Home.module.scss';
 import TricotSvg from '../components/tricotSvg';
 import fetcher from '../libs/fetcher';
 
-const urlThumbnail = 'http://localhost:8000/api/posts/thumbnail';
+const urlThumbnail = 'https://back.krea-tout-eure.fr/api/posts/thumbnail';
 
 export async function getStaticProps() {
-  const res = await fetch('http://localhost:8000/api/pages/Accueil');
+  const res = await fetch('https://back.krea-tout-eure.fr/api/pages/Accueil');
   const pageHome = await res.json();
   return { props: { pageHome } };
 }
