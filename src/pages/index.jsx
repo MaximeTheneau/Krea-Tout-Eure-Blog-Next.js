@@ -45,8 +45,14 @@ export default function Index({ pageHome, thumbnail }) {
         <meta property="og:description" content={descriptionMeta} />
         <meta property="og:site_name" content="https://krea-tout-eure.fr" />
         <meta property="og:image" content={encodeJpg(pageHome.imgHeader.path)} />
-      </Head>
+        <meta property="og:locale" content="fr_FR" />
 
+      </Head>
+      <link
+        rel="canonical"
+        href="https://krea-tout-eure.fr"
+        key="canonical"
+      />
       <section className={`card ${styles.home__header}`}>
         <div className={styles.home__header__card}>
           <div className={styles.home__header__card__img}>
