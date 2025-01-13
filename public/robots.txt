@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://kreatouteure.fr
+Host: https://krea-tout-eure.fr
 
 # Sitemaps
-Sitemap: https://kreatouteure.fr/sitemap.xml
+Sitemap: https://krea-tout-eure.fr/sitemap.xml
