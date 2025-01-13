@@ -12,7 +12,6 @@ body {
   min-height: 100vh;
 }
 p{
-  line-height: 1;
   font-size: $font-size;
 }
 main,
@@ -23,7 +22,6 @@ header{
 
 h1{
   font-size: 1.5rem;
-  line-height: 1.3;
 }
 h2 {
   font-size: 1rem;
@@ -34,6 +32,12 @@ h3{
 h1, h2{
   font-family: $font-secondary;
   font-weight: bold;
+}
+section{
+  margin: 1rem auto;
+  text-align: left;
+  width: 84%;
+
 }
   //* Button
 button{

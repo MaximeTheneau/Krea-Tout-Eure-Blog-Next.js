@@ -8,11 +8,11 @@ export default function MyApp({ Component, pageProps }) {
   const [cookiesModal, setCookiesModal] = useState(false);
   const [background, setBackground] = useState('');
   useEffect(() => {
-    async function getBacground() {
-      const response = await fetch('https://back.krea-tout-eure.fr/api/placeholder');
-      const data = await response.json();
-      return setBackground(data[1].imgBase64);
-    }
+    // async function getBacground() {
+    //   const response = await fetch('https://back.krea-tout-eure.fr/api/placeholder');
+    //   const data = await response.json();
+    //   return setBackground(data[1].imgBase64);
+    // }
 
     function cookiesStorage(cookiesModalParam) {
       if (cookiesModalParam === null) {
@@ -27,7 +27,7 @@ export default function MyApp({ Component, pageProps }) {
     }
     const cookiesModalParam = window.localStorage.getItem('cookiesModal');
     cookiesStorage(cookiesModalParam);
-    getBacground();
+    // getBacground();
   }, []);
   return (
     <>

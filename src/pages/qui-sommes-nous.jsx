@@ -4,7 +4,7 @@ import Image from 'next/image';
 import styles from '../styles/Pages.module.scss';
 
 export async function getStaticProps() {
-  const res = await fetch('https://back.krea-tout-eure.fr/api/pages/qui-sommes-nous');
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/pages/qui-sommes-nous`);
   const pageAbout = await res.json();
   return { props: { pageAbout } };
 }

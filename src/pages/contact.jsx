@@ -6,7 +6,7 @@ import styles from '../styles/Contact.module.scss';
 import Confirmation from '../components/modal/Confirmation';
 
 export async function getStaticProps() {
-  const res = await fetch('https://back.krea-tout-eure.fr/api/pages/Contactez-nous');
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/pages/Contactez-nous`);
   const pageContact = await res.json();
   return { props: { pageContact } };
 }
@@ -42,7 +42,7 @@ export default function Contact({ pageContact }) {
       method: 'POST',
       body: JSON.stringify(state.form),
     };
-    fetch('https://back.krea-tout-eure.fr/api/contact', requestOptions)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/contact`, requestOptions)
       .catch((error) => (
         console.log('error', error)
       ))

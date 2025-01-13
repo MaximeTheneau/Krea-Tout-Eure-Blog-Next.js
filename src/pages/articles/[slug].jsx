@@ -11,7 +11,7 @@ export async function getStaticPaths() {
     };
   }
 
-  const res = await fetch('https://back.krea-tout-eure.fr/api/posts');
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts`);
   const posts = await res.json();
 
   const paths = posts.map((post) => ({ params: { slug: post.slug } }));
@@ -19,7 +19,7 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps({ params }) {
-  const res = await fetch(`https://back.krea-tout-eure.fr/api/posts/${params.slug}`);
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/posts/${params.slug}`);
   const post = await res.json();
 
   return { props: { post } };
